@@ -4,653 +4,1018 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>إيجار تك | منصة إدارة تأجير السيارات</title>
-  <meta name="description" content="تصور تصميمي لمنصة إيجار تك لإدارة عمليات شركات تأجير السيارات.">
+  <meta name="description" content="منصة متكاملة لإدارة تأجير السيارات تشمل الحجوزات، العقود، الأسطول، والفواتير بكفاءة عالية.">
   <style>
-    :root{
-      --bg:#f4f1ee;
-      --bg-2:#efebe7;
-      --panel:#ffffff;
-      --panel-soft:#f9f5f2;
-      --orange:#f4b07a;
-      --orange-2:#f39b62;
-      --orange-soft:#fde7d5;
-      --gray:#e9e5e1;
-      --gray-2:#dfe2dd;
-      --ink:#2d2a2a;
-      --muted:#676260;
-      --line:#eaded2;
-      --dark:#3a3533;
-      --shadow: rgba(83, 64, 51, 0.08);
-      --white:#ffffff;
-      --green:#d8895c;
+    :root {
+      --bg: #f4f1ee;
+      --bg-soft: #f8f5f2;
+      --panel: #ffffff;
+      --panel-soft: #f9f5f0;
+      --orange: #f2a86d;
+      --orange-deep: #ea8a47;
+      --orange-soft: #fae7d7;
+      --gray: #ece8e3;
+      --gray-deep: #dfe1dc;
+      --text: #2f2a27;
+      --muted: #6c645f;
+      --line: #e8ddd5;
+      --dark: #3f3833;
+      --shadow: rgba(71, 60, 50, 0.08);
+      --green: #c07d4d;
+      --white: #fff;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Tahom,Arial,sans-serif;
-      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
-      color:var(--ink);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #f5f2ee 100%);
+      color: var(--text);
+      line-height: 1.8;
     }
-    a,button,input,select,textarea{font:inherit}
-    a{text-decoration:none;color:inherit}
-    button{cursor:pointer}
-    .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
-    .topbar{
-      position:sticky;top:0;z-index:20;
-      height:76px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);box-shadow:0 6px 20px rgba(80,68,58,.04)
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 22px;
     }
-    .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:100%}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:25px;color:var(--dark)}
-    .brandmark{
-      display:inline-flex;width:29px;height:29px;align-items:center;justify-content:center;
-      background:linear-gradient(145deg,var(--orange-2),var(--orange));
-      color:#fff;border-radius:10px;box-shadow:0 10px 20px rgba(243,155,98,.25)
-    }
-    .nav{display:flex;align-items:center;gap:22px;font-size:14px;color:var(--muted)}
-    .nav a{padding:10px 6px;transition:.2s}
-    .nav a.active,.nav a:hover{color:var(--orange-2)}
-    .actions{display:flex;align-items:center;gap:12px}
-    .btn{
-      border:0;border-radius:14px;padding:12px 20px;background:linear-gradient(120deg,var(--orange),var(--orange-2));
-      color:#fff;font-weight:800;box-shadow:0 10px 24px rgba(243,155,98,.22)
-    }
-    .btn.ghost{
-      border:1px solid var(--line);background:rgba(255,255,255,.7);color:var(--dark)
-    }
-    .menu{display:none}
-    .page{display:none}
-    .page.active{display:block}
 
-    .hero{
-      position:relative;overflow:hidden;
-      background:radial-gradient(ellipse at 72% 30%, rgba(253,231,213,.9) 0%, rgba(247,242,237,.95) 35%, rgba(244,241,238,1) 75%);
-      border-bottom:1px solid var(--line)
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.84);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 18px rgba(56, 43, 35, 0.025);
     }
-    .hero:before{
-      content:"";position:absolute;inset:0;background:
-        linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.15) 35%, transparent 100%),
-        repeating-linear-gradient(0deg, transparent 0 58px, rgba(255,255,255,.08) 59px 60px);
-      pointer-events:none
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 20px;
     }
-    .hero-inner{
-      position:relative;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;
-      min-height:560px;gap:40px;padding-top:42px;padding-bottom:40px
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--dark);
     }
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
-      background:var(--orange-soft);color:var(--dark);font-size:12px;font-weight:700;border:1px solid rgba(243,155,98,.28)
+    .brandmark {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: linear-gradient(145deg, var(--orange), var(--orange-deep));
+      color: var(--white);
+      font-size: 16px;
+      box-shadow: 0 12px 25px rgba(234,138,71,0.24);
     }
-    .hero h1{margin:18px 0 20px;font-size:clamp(38px,4.4vw,62px);line-height:1.2;letter-spacing:-1px}
-    .hero h1 span{color:var(--orange-2)}
-    .hero p{margin:0 0 26px;max-width:550px;color:var(--muted);font-size:17px;line-height:1.9}
-    .hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
-    .hero-visual{
-      position:relative;height:420px;border-radius:28px;overflow:hidden;border:1px solid rgba(236,196,167,.7);
-      background:linear-gradient(90deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.08) 30%, rgba(255,255,255,.2) 100%),
-                 linear-gradient(180deg,#f9efe7 0%,#efe9e1 100%);
-      box-shadow:0 30px 60px rgba(83,64,51,.08)
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
     }
-    .hero-visual:after{
-      content:"";position:absolute;inset:0;background:
-        radial-gradient(circle at 58% 64%, rgba(243,155,98,.18), transparent 22%),
-        radial-gradient(circle at 25% 18%, rgba(255,255,255,.8), transparent 18%);
+    .nav a { padding: 8px 4px; transition: .2s ease; }
+    .nav a:hover, .nav a.active { color: var(--orange-deep); }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 20px;
+      font-weight: 800;
+      transition: .2s ease;
     }
-    .city,.road,.car-emoji{position:absolute}
-    .city{inset:0;display:flex;align-items:flex-end;justify-content:center;padding:14% 7% 0}
-    .city .skyline{
-      width:100%;height:58%;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,.15));
-      border-radius:20px 20px 0 0;border:1px solid rgba(255,255,255,.2)
+    .btn.primary {
+      background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+      color: var(--white);
+      box-shadow: 0 12px 26px rgba(234,138,71,0.22);
     }
-    .road{left:10%;right:10%;bottom:13%;height:90px;background:linear-gradient(180deg,#cfc7bf,#b3aea9);border-radius:18px 18px 0 0;border:1px solid rgba(115,105,98,.05)}
-    .car-emoji{bottom:90px;left:50%;transform:translateX(-50%) scale(1.05);font-size:110px;filter:drop-shadow(0 16px 18px rgba(148,93,54,.12));z-index:2}
-    .visual-label{
-      position:absolute;right:22px;bottom:20px;z-index:4;padding:14px 16px;border-radius:14px;
-      background:rgba(255,255,255,.78);border:1px solid rgba(243,155,98,.2);box-shadow:0 10px 18px rgba(80,68,58,.06)
+    .btn.secondary {
+      background: var(--white);
+      color: var(--dark);
+      border: 1px solid var(--line);
     }
-    .visual-label strong{display:block;font-size:17px;color:var(--dark)}
-    .visual-label span{font-size:12px;color:var(--muted)}
+    .btn:hover { transform: translateY(-1px); }
+    .menu-btn { display: none; }
 
-    .hero-stats{background:rgba(255,255,255,.7);border-top:1px solid var(--line)}
-    .stats-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0}
-    .stat{padding:22px 16px;text-align:center;border-left:1px solid var(--line)}
-    .stat:last-child{border-left:0}
-    .stat strong{display:block;font-size:25px;color:var(--orange-2);margin-bottom:8px}
-    .stat span{font-size:12px;line-height:1.7;color:var(--muted)}
-
-    .section{padding:78px 0}
-    .section-head{text-align:center;max-width:720px;margin:0 auto 40px}
-    .eyebrow{display:inline-block;font-size:13px;font-weight:800;color:var(--orange-2);letter-spacing:0.2em;margin-bottom:12px}
-    .section-head h2{margin:0;font-size:clamp(28px,3vw,40px);letter-spacing:-0.6px}
-    .section-head p{margin:12px auto 0;color:var(--muted);line-height:1.9;max-width:660px}
-
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{
-      background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 22px;
-      box-shadow:0 10px 30px var(--shadow);transition:.25s
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 68% 28%, rgba(251,232,214,0.9), transparent 28%), linear-gradient(180deg, #f9f5f1 0%, #f3efe9 100%);
+      border-bottom: 1px solid var(--line);
     }
-    .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(155,125,103,.08)}
-    .card-icon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:24px;
-      background:var(--orange-soft);color:var(--orange-2);margin-bottom:20px;border:1px solid rgba(243,155,98,.12)}
-    .card h3{margin:0 0 10px;font-size:22px}
-    .card p{margin:0;color:var(--muted);line-height:1.9}
-
-    .two-col{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:38px}
-    .content-title{margin:0 0 18px;font-size:clamp(30px,3vw,42px);line-height:1.2}
-    .content-copy{margin:0;color:var(--muted);line-height:2}
-    .benefits{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:18px;margin-top:26px}
-    .benefit{display:flex;align-items:flex-start;gap:14px;background:var(--panel-soft);border:1px solid var(--line);border-radius:16px;padding:18px 16px}
-    .benefit-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--orange-soft);color:var(--orange-2)}
-    .benefit strong{display:block;margin-bottom:6px}
-    .benefit small{color:var(--muted);line-height:1.8}
-
-    .device-scene{
-      background:linear-gradient(135deg,#fceee1 0%,#f5f1ee 100%);border:1px solid var(--line);
-      border-radius:24px;padding:22px;box-shadow:0 18px 30px rgba(108,89,76,.05)
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent 35%, rgba(255,255,255,0.16));
+      pointer-events: none;
     }
-    .laptop{width:100%;max-width:620px;height:270px;position:relative;margin:0 auto}
-    .screen{position:absolute;left:50%;transform:translateX(-50%);top:0;width:78%;height:68%;background:#fff;border:1px solid var(--line);border-radius:16px 16px 8px 8px;box-shadow:0 18px 30px rgba(90,65,52,.06)}
-    .screen .brand{font-size:14px;padding:12px 16px}
-    .screen .chart{height:140px;margin:12px 16px;border-radius:12px;background:linear-gradient(180deg,#fffdfb,#f7f5f2);border:1px solid var(--line)}
-    .screen .metrics{display:flex;gap:12px;padding:0 16px}
-    .screen .metrics .metric{flex:1;background:var(--orange-soft);border-radius:12px;padding:12px 10px;text-align:center;font-size:12px;color:var(--dark)}
-    .device-line{position:absolute;left:50%;transform:translateX(-50%);bottom:28px;width:76%;height:8px;background:#d7d1cd;border-radius:999px}
-    .device-line.green{background:#e9c6a9;width:62%}
-    .phone{position:absolute;right:18px;bottom:0;width:130px;height:165px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:8px;box-shadow:0 18px 30px rgba(90,65,52,.06)}
-    .phone .screen{position:relative;left:0;transform:none;width:100%;height:100%;border-radius:16px;background:linear-gradient(180deg,#fff6ef,#f8f3ee)}
-
-    .dark-section{background:linear-gradient(145deg,#f8efe8 0%,#efe8e1 100%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .dark-section .card{background:rgba(255,255,255,.7);border-color:rgba(243,155,98,.15)}
-    .dark-section .card h3,.dark-section .card p{color:var(--dark)}
-
-    .banner{
-      display:flex;align-items:center;justify-content:space-between;gap:20px;
-      background:linear-gradient(90deg,var(--orange-soft),rgba(255,255,255,.88));
-      border:1px solid rgba(243,155,98,.18);border-radius:22px;padding:28px 32px;
-      box-shadow:0 22px 35px rgba(80,68,58,.05)
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      min-height: 620px;
+      gap: 40px;
+      padding-top: 44px;
+      padding-bottom: 62px;
     }
-    .banner h2{margin:0 0 8px;font-size:clamp(28px,2.8vw,38px)}
-    .banner p{margin:0;color:var(--muted)}
-
-    .page-hero{
-      background:linear-gradient(135deg,#fefaf6 0%,#f5f0eb 100%);
-      border-bottom:1px solid var(--line)
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-soft);
+      color: var(--dark);
+      border: 1px solid rgba(234,138,71,0.18);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
     }
-    .page-hero .wrap{padding-top:52px;padding-bottom:44px}
-    .crumb{font-size:12px;color:var(--muted);margin-bottom:12px}
-    .page-hero h1{margin:0 0 12px;font-size:clamp(34px,4vw,50px)}
-    .page-hero p{margin:0;color:var(--muted);line-height:1.9;max-width:760px}
-
-    .notice{margin:0 auto 28px;max-width:900px;border:1px solid rgba(243,155,98,.2);background:rgba(255,255,255,.7);border-radius:16px;padding:16px 20px;color:var(--muted)}
-    .fleet-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-    .fleet-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 16px 30px rgba(80,68,58,.04)}
-    .fleet-image{height:160px;background:linear-gradient(135deg,var(--orange-soft),#f6f1ed)}
-    .fleet-info{padding:18px 16px}
-    .fleet-info h3{margin:0 0 8px}
-    .fleet-info p{margin:0;color:var(--muted);line-height:1.8}
-
-    .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .price-card{
-      background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 22px;
-      box-shadow:0 14px 30px rgba(80,68,58,.04)
+    h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(40px, 4vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -1.3px;
+      color: var(--dark);
     }
-    .price-card.popular{border:2px solid rgba(243,155,98,.45);box-shadow:0 18px 40px rgba(243,155,98,.08)}
-    .popular-label{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--orange-soft);color:var(--orange-2);font-size:11px;font-weight:800}
-    .price{font-size:38px;font-weight:900;display:flex;align-items:center;gap:6px;margin:18px 0 10px}
-    .price small{font-size:12px;color:var(--muted);font-weight:600}
-    .price-card ul{padding-right:18px;margin:18px 0 22px;color:var(--muted);line-height:2}
-
-    .faq{max-width:900px;margin:0 auto}
-    .faq details{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;margin-bottom:12px}
-    .faq summary{font-weight:700;cursor:pointer}
-    .faq p{margin:10px 0 0;color:var(--muted);line-height:1.9}
-
-    .form-box{max-width:760px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:28px}
-    .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .field{display:grid;gap:8px}
-    .field label{font-weight:700;color:var(--dark)}
-    .field input,.field select,.field textarea{width:100%;padding:14px 14px;border:1px solid var(--line);border-radius:12px;background:#fbf9f7;color:var(--dark);resize:vertical}
-    .field.full{grid-column:1 / -1}
-    .submit-row{margin-top:18px;display:flex;justify-content:center}
-
-    .footer{background:linear-gradient(180deg,#f7f3ee 0%,#f1ece7 100%);color:var(--dark);border-top:1px solid var(--line);padding:38px 0 16px}
-    .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:24px}
-    .footer h4{margin:0 0 12px;font-size:16px}
-    .footer p,.footer a{margin:0;color:var(--muted);line-height:2}
-    .footer-links{display:grid;gap:8px}
-    .copyright{border-top:1px solid var(--line);margin-top:26px;padding-top:16px;text-align:center;color:var(--muted);font-size:13px}
-
-    .toast{position:fixed;left:20px;bottom:20px;max-width:320px;padding:14px 18px;border-radius:12px;background:rgba(58,53,51,.92);color:#fff;display:none;z-index:50;box-shadow:0 12px 28px rgba(30,22,16,.18)}
-
-    @media (max-width: 900px){
-      .nav{gap:12px;font-size:13px}
-      .hero-inner,.two-col,.footer-grid{grid-template-columns:1fr}
-      .hero-inner{min-height:0;padding-top:30px}
-      .stats-grid{grid-template-columns:repeat(3,1fr)}
-      .cards,.fleet-list,.pricing-grid{grid-template-columns:1fr}
-      .fields{grid-template-columns:1fr}
-      .menu{display:inline-flex}
-      .nav{display:none;position:absolute;top:76px;right:0;left:0;background:rgba(255,255,255,.96);padding:18px 22px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
-      .nav.open{display:flex}
+    h1 span { color: var(--orange-deep); }
+    .lead {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.9;
     }
-    @media (max-width: 620px){
-      .topbar{height:66px}
-      .brand{font-size:20px}
-      .hero h1{font-size:38px}
-      .hero-visual{height:260px}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .banner{flex-direction:column;align-items:flex-start}
-      .section{padding:54px 0}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      background: rgba(255,255,255,0.78);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .stat {
+      padding: 22px 16px;
+      text-align: center;
+      border-left: 1px solid var(--line);
+    }
+    .stat:last-child { border-left: 0; }
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      color: var(--orange-deep);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .visual-card {
+      position: relative;
+      height: 470px;
+      border-radius: 26px;
+      border: 1px solid rgba(234,138,71,0.18);
+      background: linear-gradient(180deg, #fffefb 0%, #f7f1eb 100%);
+      overflow: hidden;
+      box-shadow: 0 26px 50px rgba(70, 58, 46, 0.08);
+    }
+    .visual-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 30%, rgba(242,168,109,0.18), transparent 20%);
+    }
+    .visual-laptop {
+      position: absolute;
+      top: 70px;
+      right: 58px;
+      width: 72%;
+      height: 220px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 26px rgba(56, 43, 35, 0.06);
+      z-index: 2;
+    }
+    .visual-laptop .screen-top {
+      height: 18px;
+      background: linear-gradient(90deg, #f8efe8, #f1e8e0);
+      border-bottom: 1px solid var(--line);
+      border-radius: 18px 18px 0 0;
+    }
+    .bars {
+      display: flex;
+      gap: 12px;
+      align-items: end;
+      height: 150px;
+      padding: 18px 18px 0;
+    }
+    .bars span {
+      flex: 1;
+      border-radius: 10px 10px 0 0;
+      background: linear-gradient(180deg, var(--orange-soft), var(--orange));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
+    }
+    .mini-metric {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 18px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .mini-metric strong { color: var(--dark); }
+    .visual-phone {
+      position: absolute;
+      left: 34px;
+      bottom: 34px;
+      width: 150px;
+      height: 190px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 34px rgba(56, 43, 35, 0.08);
+      padding: 10px;
+      z-index: 2;
+    }
+    .visual-phone .screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fffaf5 0%, #f3eee9 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .screen-mark {
+      position: absolute;
+      inset: 14px 14px auto 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--orange-soft);
+    }
+    .screen-row {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      height: 10px;
+      border-radius: 8px;
+      background: rgba(234,138,71,0.12);
+    }
+    .screen-row:nth-child(2){ top: 40px; }
+    .screen-row:nth-child(3){ top: 62px; }
+    .screen-row:nth-child(4){ top: 90px; }
+    .screen-card {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      border-radius: 12px;
+      background: rgba(242,168,109,0.12);
+      border: 1px solid rgba(234,138,71,0.14);
+      height: 54px;
+    }
+    .pill-badge {
+      position: absolute;
+      left: 42px;
+      bottom: 40px;
+      background: rgba(255,255,255,0.86);
+      color: var(--dark);
+      border: 1px solid rgba(234,138,71,0.18);
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: 0 12px 28px rgba(56, 43, 35, 0.06);
+      z-index: 3;
+    }
+    .pill-badge strong { display: block; font-size: 20px; }
+    .pill-badge small { color: var(--muted); }
+
+    section { padding: 90px 0; }
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+    .section-head .eyebrow {
+      margin-bottom: 12px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(30px, 2.7vw, 42px);
+      line-height: 1.25;
+      color: var(--dark);
+    }
+    .section-head p {
+      margin: 18px auto 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px 22px;
+      box-shadow: 0 12px 28px var(--shadow);
+    }
+    .card-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      background: var(--orange-soft);
+      color: var(--orange-deep);
+      margin-bottom: 18px;
+      border: 1px solid rgba(234,138,71,0.16);
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      color: var(--dark);
+      font-size: 22px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .content-title {
+      margin: 0 0 16px;
+      font-size: clamp(28px, 2.9vw, 42px);
+      line-height: 1.25;
+      color: var(--dark);
+    }
+    .content-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 16px;
+    }
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .benefit {
+      display: flex;
+      gap: 14px;
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      border-radius: 16px;
+    }
+    .benefit-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--orange-soft);
+      color: var(--orange-deep);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .benefit strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--dark);
+    }
+    .benefit small {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .device-showcase {
+      background: linear-gradient(135deg, #fff8f2 0%, #f7f4f1 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 18px 32px rgba(92, 76, 62, 0.04);
+    }
+    .device-window {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      height: 280px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .device-window::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      background: linear-gradient(90deg, #f4f0ec, #fbf9f6);
+      border-bottom: 1px solid var(--line);
+    }
+    .device-window .bars {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 76px;
+      height: 132px;
+      display: flex;
+      align-items: end;
+      gap: 12px;
+      padding: 0;
+    }
+    .device-window .bars span {
+      background: linear-gradient(180deg, #f6d5b3, #eb8a4c);
+      border-radius: 10px 10px 0 0;
+    }
+    .device-window .metrics {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      gap: 12px;
+    }
+    .device-window .metrics .mini-box {
+      flex: 1;
+      padding: 12px;
+      background: var(--orange-soft);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .dark-panel {
+      background: linear-gradient(180deg, #f9f0ea 0%, #efeae6 100%);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fleet-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 16px;
+    }
+    .fleet-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(80, 64, 52, 0.04);
+    }
+    .fleet-image {
+      height: 170px;
+      background: linear-gradient(135deg, #f8eae0 0%, #f2f0ee 100%);
+    }
+    .fleet-body {
+      padding: 18px 16px 20px;
+    }
+    .fleet-body h3 {
+      margin: 0 0 8px;
+      color: var(--dark);
+      font-size: 24px;
+    }
+    .fleet-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .price-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px 22px;
+      box-shadow: 0 12px 24px rgba(80, 64, 52, 0.04);
+    }
+    .price-card.popular {
+      border: 2px solid rgba(234,138,71,0.35);
+      position: relative;
+      box-shadow: 0 18px 34px rgba(234,138,71,0.08);
+    }
+    .popular-tag {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: var(--orange-deep);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .price-card h3 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--dark);
+    }
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 20px 0 16px;
+      font-weight: 900;
+      font-size: 38px;
+      color: var(--dark);
+    }
+    .price small {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .price-card ul {
+      margin: 0 0 20px;
+      padding-right: 18px;
+      color: var(--muted);
+      line-height: 2.2;
+    }
+
+    .cta-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: linear-gradient(90deg, rgba(234,138,71,0.08), rgba(255,255,255,0.8));
+      border: 1px solid rgba(234,138,71,0.18);
+      border-radius: 22px;
+      padding: 26px 28px;
+      box-shadow: 0 18px 32px rgba(71, 60, 50, 0.04);
+    }
+    .cta-banner h3 {
+      margin: 0 0 8px;
+      color: var(--dark);
+      font-size: clamp(26px, 2.5vw, 36px);
+    }
+    .cta-banner p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-box {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 24px rgba(80, 64, 52, 0.04);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+    .field.full { grid-column: 1 / -1; }
+    .field label {
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbf9f7;
+      color: var(--dark);
+      padding: 14px 12px;
+      resize: vertical;
+    }
+    .submit-row {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .footer {
+      background: linear-gradient(180deg, #f8f2ee 0%, #f1ece7 100%);
+      border-top: 1px solid var(--line);
+      padding: 42px 0 22px;
+      color: var(--dark);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 22px;
+    }
+    .footer h4 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 16px;
+    }
+    .footer p, .footer a {
+      color: var(--muted);
+      line-height: 2;
+    }
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+    .copyright {
+      border-top: 1px solid var(--line);
+      margin-top: 26px;
+      padding-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      max-width: 340px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(50,42,38,0.94);
+      color: var(--white);
+      display: none;
+      z-index: 60;
+      box-shadow: 0 18px 34px rgba(56, 43, 35, 0.22);
+    }
+
+    @media (max-width: 960px) {
+      .nav { display: none; }
+      .nav.open { display: flex; position: absolute; top: 76px; right: 0; left: 0; background: rgba(255,255,255,0.96); padding: 18px 24px; flex-direction: column; align-items: flex-start; border-bottom: 1px solid var(--line); }
+      .menu-btn { display: inline-flex; }
+      .hero-inner, .split, .footer-grid, .form-grid, .cards-3, .fleet-list, .pricing-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cta-banner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 620px) {
+      .topbar-inner { min-height: 68px; }
+      .brand { font-size: 22px; }
+      .hero-inner { min-height: 0; padding-bottom: 26px; }
+      .stats-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stat { border-left: 0; border-top: 1px solid var(--line); }
+      .stat:first-child { border-top: 0; }
+      section { padding: 70px 0; }
+      .visual-card { height: 360px; }
+      .visual-laptop { top: 60px; right: 18px; width: 68%; }
+      .visual-phone { left: 18px; width: 120px; height: 160px; }
+      .benefits { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
-    <div class="wrap">
-      <a class="brand" href="#home" data-page="home"><span class="brandmark">◆</span> إيجار تك</a>
+    <div class="wrap topbar-inner">
+      <a href="#home" class="brand"><span class="brandmark">◆</span> إيجار تك</a>
       <nav class="nav" id="nav">
-        <a href="#home" data-page="home" class="active">الرئيسية</a>
-        <a href="#features" data-page="features">المميزات</a>
-        <a href="#fleet" data-page="fleet">الأسطول</a>
-        <a href="#pricing" data-page="pricing">الباقات</a>
-        <a href="#about" data-page="about">عن المنصة</a>
-        <a href="#faq" data-page="faq">الأسئلة</a>
+        <a href="#home" class="active">الرئيسية</a>
+        <a href="#features">المميزات</a>
+        <a href="#fleet">الأسطول</a>
+        <a href="#pricing">الباقات</a>
+        <a href="#about">عن المنصة</a>
+        <a href="#contact">تواصل معنا</a>
       </nav>
-      <div class="actions">
-        <button class="btn" onclick="navigate('contact')">اطلب تجربة</button>
-        <button class="btn ghost menu" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="فتح القائمة">☰</button>
+      <div class="header-actions">
+        <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">اطلب تجربة</button>
+        <button class="btn secondary menu-btn" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="page active" id="home">
-      <div class="hero">
-        <div class="wrap hero-inner">
+    <section class="hero" id="home">
+      <div class="wrap hero-inner">
+        <div>
+          <span class="eyebrow">منصة لإدارة تأجير السيارات</span>
+          <h1>أسطولك يتحرك بشكل أفضل.<br><span>وأعمالك تنمو بثقة.</span></h1>
+          <p class="lead">إدارة كاملة للحجوزات، العقود، العملاء، الأسطول، والفواتير في منصة واحدة، مصممة لتبسيط العمليات وتعزيز تجربة العملاء.</p>
+          <div class="hero-actions">
+            <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">ابدأ الآن</button>
+            <button class="btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">اكتشف المميزات</button>
+          </div>
+        </div>
+
+        <div class="visual-card" aria-label="لوحة تحكم المنصة">
+          <div class="visual-phone">
+            <div class="screen">
+              <div class="screen-mark"></div>
+              <div class="screen-row"></div>
+              <div class="screen-row"></div>
+              <div class="screen-row"></div>
+              <div class="screen-card"></div>
+            </div>
+          </div>
+          <div class="visual-laptop">
+            <div class="screen-top"></div>
+            <div class="bars">
+              <span style="height: 34%;"></span>
+              <span style="height: 48%;"></span>
+              <span style="height: 56%;"></span>
+              <span style="height: 72%;"></span>
+              <span style="height: 88%;"></span>
+              <span style="height: 64%;"></span>
+            </div>
+            <div class="mini-metric"><span>حجوزات هذا الشهر</span><strong>1,280</strong></div>
+          </div>
+          <div class="pill-badge">
+            <strong>+24.6%</strong>
+            <small>تحسين في الإنتاجية</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat"><strong>4.9</strong><span>متوسط تقييم العملاء</span></div>
+        <div class="stat"><strong>24/7</strong><span>متابعة مستمرة</span></div>
+        <div class="stat"><strong>1.2k</strong><span>حجوزات تم تنفيذها</span></div>
+        <div class="stat"><strong>87%</strong><span>تحسين في الكفاءة</span></div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">لماذا المنصة؟</div>
+          <h2>حلّ متكامل يصنع تجربة أفضل لك ولعملائك</h2>
+          <p>من خلال لوحة تحكم مرنة، وتنسيق واضح، وأسعار مناسبة، يمكنك إدارة نشاطك بشكل أنسب مع تقليل الجهد وتحسين الجودة.</p>
+        </div>
+
+        <div class="cards-3">
+          <article class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>إدارة العمليات</h3>
+            <p>تابع كل خطوة من الحجز إلى التسليم والاستلام من مكان واحد، دون عناء أو تشتت في الأدوات.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">📊</div>
+            <h3>تقارير دقيقة</h3>
+            <p>احصل على تقارير فورية حول الإيرادات، الأداء، عدد الحجوزات، ومعدل الاستخدام لكل سيارة.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">💬</div>
+            <h3>تواصل ذكي</h3>
+            <p>أرسل التنبيهات إلى العملاء والموظفين بشكل فوري لتقليل التأخير وتعزيز تجربة الخدمة.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div>
+          <div class="eyebrow">مزايا واضحة</div>
+          <h2 class="content-title">منصة مبنية على احتياجك اليومي</h2>
+          <p class="content-copy">تم تصميم منصتنا لتعطيك رؤية دقيقة للعمليات اليومية، مع سهولة الوصول إلى البيانات، وتقليل الأخطاء التشغيلية، وتحسين تجربة الحجز من أول خطوة حتى التسليم.</p>
+          <div class="benefits">
+            <div class="benefit">
+              <div class="benefit-mark">✓</div>
+              <div><strong>تنفيذ سريع</strong><small>تسهل متابعة الطلبات وتقلل الوقت الضائع.</small></div>
+            </div>
+            <div class="benefit">
+              <div class="benefit-mark">✓</div>
+              <div><strong>مراقبة مستمرة</strong><small>تتابع حالة كل سيارة وكل عقد من خلال لوحة واضحة.</small></div>
+            </div>
+            <div class="benefit">
+              <div class="benefit-mark">✓</div>
+              <div><strong>تجربة عميل أفضل</strong><small>تجعل الحجز أسهل وأكثر شفافية لدى العملاء.</small></div>
+            </div>
+            <div class="benefit">
+              <div class="benefit-mark">✓</div>
+              <div><strong>تقارير مرنة</strong><small>تساعدك على اتخاذ القرار بسرعة بناءً على بيانات واضحة.</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-showcase">
+          <div class="device-window">
+            <div class="bars">
+              <span style="height: 35%;"></span>
+              <span style="height: 50%;"></span>
+              <span style="height: 58%;"></span>
+              <span style="height: 72%;"></span>
+              <span style="height: 88%;"></span>
+              <span style="height: 66%;"></span>
+            </div>
+            <div class="metrics">
+              <div class="mini-box"><strong>1.2K</strong><br>حجوزات</div>
+              <div class="mini-box"><strong>87%</strong><br>كفاءة</div>
+              <div class="mini-box"><strong>24/7</strong><br>مراقبة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-panel" id="fleet">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">إدارة الأسطول</div>
+          <h2>راقب كل سيارة في أسطولك بدقة</h2>
+          <p>من خلال رؤية واضحة لحالة كل مركبة، يمكنك توزيع الطلبات بشكل أفضل، وتقليل التأخيرات، وتحسين استخدام الموارد.</p>
+        </div>
+
+        <div class="fleet-list">
+          <article class="fleet-card">
+            <div class="fleet-image"></div>
+            <div class="fleet-body">
+              <h3>سيارات عائلية</h3>
+              <p>مناسبة للعائلات والرحلات الداخلية، مع متابعة مباشرة لحالة التوفر والطلب.</p>
+            </div>
+          </article>
+          <article class="fleet-card">
+            <div class="fleet-image" style="background:linear-gradient(135deg,#f8eadb,#f1efed);"></div>
+            <div class="fleet-body">
+              <h3>سيارات رجال أعمال</h3>
+              <p>تجربة مريحة للرحلات الطويلة، مع إدارة دقيقة للجدولة ومواعيد الاستلام.</p>
+            </div>
+          </article>
+          <article class="fleet-card">
+            <div class="fleet-image" style="background:linear-gradient(135deg,#f5e6d8,#f0f0ed);"></div>
+            <div class="fleet-body">
+              <h3>سيارات فاخرة</h3>
+              <p>خدمة مخصصة للعملاء ذوي الاحتياجات المميزة، مع مستويات متقدمة من التنظيم.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">باقات مناسبة</div>
+          <h2>اختر الخطة التي تناسب نشاطك</h2>
+          <p>خطط مرنة تدعم الشركات الصغيرة والمتوسطة والكبيرة، مع إمكانية تخصيص خدمات إضافية حسب احتياجك.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>الأساسية</h3>
+            <div class="price">299 <small>ريال/شهري</small></div>
+            <ul>
+              <li>إدارة الحجوزات الأساسية</li>
+              <li>تقارير أساسية</li>
+              <li>متابعة العملاء</li>
+              <li>دعم مباشر عبر البريد</li>
+            </ul>
+            <button class="btn secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">ابدأ الآن</button>
+          </article>
+
+          <article class="price-card popular">
+            <span class="popular-tag">الأكثر طلبًا</span>
+            <h3>المتقدمة</h3>
+            <div class="price">599 <small>ريال/شهري</small></div>
+            <ul>
+              <li>كل مميزات الأساسية</li>
+              <li>تقارير متقدمة</li>
+              <li>إشعارات ذكية</li>
+              <li>إدارة العقود والعمليات</li>
+            </ul>
+            <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">اختيار هذه الباقة</button>
+          </article>
+
+          <article class="price-card">
+            <h3>المخصصة</h3>
+            <div class="price">حسب الطلب</div>
+            <ul>
+              <li>حلول خاصة للشركات الكبيرة</li>
+              <li>تخصيص واجهة حسب النشاط</li>
+              <li>دعم فني متقدم</li>
+              <li>تدريب مخصص لفريقك</li>
+            </ul>
+            <button class="btn secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">طلب استشارة</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="cta-banner">
           <div>
-            <span class="pill">✦ منصة لإدارة تأجير السيارات</span>
-            <h1>أسطولك يتحرك.<br><span>وأعمالك تتقدم.</span></h1>
-            <p>إدارة الحجوزات، العقود، العملاء، الطلبات، والمراقبة التشغيلية من لوحة واحدة بواجهة واضحة وسريعة.</p>
-            <div class="hero-buttons">
-              <button class="btn" onclick="navigate('contact')">اطلب تجربة</button>
-              <button class="btn ghost" onclick="navigate('features')">اكتشف المزايا</button>
-            </div>
+            <div class="eyebrow">خطوتك التالية</div>
+            <h3>هل تريد منظومة تعطيك تحكمًا أكبر؟</h3>
+            <p>دعنا نساعدك في اختيار الحل الأنسب لعملك واحتياجاتك التشغيلية.</p>
           </div>
-
-          <div class="hero-visual">
-            <div class="city"><div class="skyline"></div></div>
-            <div class="road"></div>
-            <div class="car-emoji">🚗</div>
-            <div class="visual-label">
-              <strong>+24.6%</strong>
-              <span>تحسين في إدارة الحجز</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-stats">
-          <div class="wrap stats-grid">
-            <div class="stat"><strong>▥</strong><span>تنظيم ومتابعة<br>العمليات</span></div>
-            <div class="stat"><strong>▤</strong><span>مراقبة الأداء<br>الحقيقي</span></div>
-            <div class="stat"><strong>▣</strong><span>تقارير فورية<br>وتنبيهات</span></div>
-            <div class="stat"><strong>▦</strong><span>عمليات أسرع<br>للكفالة</span></div>
-            <div class="stat"><strong>▨</strong><span>تحكم كامل<br>بالمخزون</span></div>
-            <div class="stat"><strong>▩</strong><span>تنوع في<br>خطط استخدامك</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">المنصة</div>
-            <h2>إدارة ذكية لمشاريع التأجير</h2>
-            <p>حل متكامل يساعدك على متابعة العقود والمركبات والعملاء، مع تقارير دقيقة وتقسيم واضح للمهام.</p>
-          </div>
-
-          <div class="cards">
-            <article class="card">
-              <div class="card-icon">⚙️</div>
-              <h3>إدارة العمليات</h3>
-              <p>منح كل فريقك رؤية واحدة عن الحجوزات، حالات المركبات، والتسليم والاستلام.</p>
-            </article>
-            <article class="card">
-              <div class="card-icon">📈</div>
-              <h3>تقارير الأداء</h3>
-              <p>تابع الإيرادات، استخدام المركبات، والطلبات عبر لوحات تحكم تفاعلية ومحدثة في الوقت الفعلي.</p>
-            </article>
-            <article class="card">
-              <div class="card-icon">💬</div>
-              <h3>تواصل أفضل</h3>
-              <p>إرسال إشعارات فورية للعملاء والموظفين مع متابعة أفضل لتجربة الحجز من البداية إلى النهاية.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-
-      <div class="section dark-section">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">الخدمات</div>
-            <h2>منصة مصممة لتبسيط إدارة نشاطك</h2>
-            <p>كل شيء مهيأ ليتناسب مع أسلوب عملك، من إدارة المخزون إلى متابعة العملاء والعقود.</p>
-          </div>
-
-          <div class="cards">
-            <article class="card">
-              <div class="card-icon">🚘</div>
-              <h3>إدارة الأسطول</h3>
-              <p>مراقبة حالة كل سيارة، المدة المتاحة، والطلبات المرتبطة بها بدقة ووضوح.</p>
-            </article>
-            <article class="card">
-              <div class="card-icon">🧾</div>
-              <h3>العقود والحجوزات</h3>
-              <p>أسهل طريقة لإنشاء العقود، متابعة التواريخ، والاشتراطات الخاصة بكل عميل.</p>
-            </article>
-            <article class="card">
-              <div class="card-icon">🛡️</div>
-              <h3>إشعارات وموثوقية</h3>
-              <p>نظام تنبيهات يضمن متابعة كل طلب، وآلية موثوقة للتأكد من سلامة كل خطوة.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="wrap two-col">
-          <div>
-            <div class="eyebrow">تجربة استخدام مرنة</div>
-            <h2 class="content-title">من المكتب إلى الميدان، بتجربة مريحة</h2>
-            <p class="content-copy">واجهة بسيطة ومباشرة تجعل التفاعل مع المنصة سهلًا على الموظفين والعملاء، مع تنقل سلس من لوحة التحكم إلى الميدان.</p>
-            <div class="benefits">
-              <div class="benefit">
-                <div class="benefit-icon">✓</div>
-                <div><strong>تنفيذ أسرع</strong><small>إدارة المهام بشكل مرتب وسريع جدًا.</small></div>
-              </div>
-              <div class="benefit">
-                <div class="benefit-icon">✓</div>
-                <div><strong>تواصل مباشر</strong><small>إشعارات فورية لعمليات الحجز والطلب.</small></div>
-              </div>
-              <div class="benefit">
-                <div class="benefit-icon">✓</div>
-                <div><strong>مراقبة واضحة</strong><small>تتبع مستمر للحالة التشغيلية للمركبات.</small></div>
-              </div>
-              <div class="benefit">
-                <div class="benefit-icon">✓</div>
-                <div><strong>تقارير دقيقة</strong><small>لوحات متابعة قوية ونتائج قابلة للتنفيذ.</small></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="device-scene">
-            <div class="laptop">
-              <div class="screen">
-                <div class="brand" style="font-weight:800;color:var(--dark)">إيجار تك</div>
-                <div class="chart"></div>
-                <div class="metrics">
-                  <div class="metric"><strong>24.6%</strong><br>نمو</div>
-                  <div class="metric"><strong>87%</strong><br>رضا</div>
-                  <div class="metric"><strong>1.2K</strong><br>حجوزات</div>
-                </div>
-              </div>
-              <div class="device-line green"></div>
-              <div class="device-line"></div>
-            </div>
-            <div class="phone">
-              <div class="screen"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section" style="padding-top:0">
-        <div class="wrap">
-          <div class="banner">
-            <div>
-              <div class="eyebrow">خطوتك القادمة</div>
-              <h2>هل تريد اكتشاف ما يناسب نشاطك؟</h2>
-              <p>يمكننا تجهيز تجربة مناسبة لميزانيتك وأهدافك التشغيلية.</p>
-            </div>
-            <button class="btn" onclick="navigate('contact')">تواصل معنا</button>
-          </div>
+          <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">تواصل معنا</button>
         </div>
       </div>
     </section>
 
-    <section class="page" id="features">
-      <div class="page-hero">
-        <div class="wrap">
-          <div class="crumb">الرئيسية / المميزات</div>
-          <h1>مميزات تساعدك على تنظيم أعمالك</h1>
-          <p>تجمع المنصة بين المرونة في الإدارة والتقارير، مما يسهّل التحكم بالأسطول، العملاء، والعقود في وقت قياسي.</p>
+    <section id="about">
+      <div class="wrap split">
+        <div>
+          <div class="eyebrow">عن المنصة</div>
+          <h2 class="content-title">منصة تراعي احتياجك بشكل عملي</h2>
+          <p class="content-copy">أطلقنا إيجار تك كمنصة عربية عملية تساعدك على تنظيم نشاطك، متابعة كل عملية بشكل موحد، وتقليل التعقيدات الداخلية. الهدف هو جعل إدارة التوظيف والتأجير أكثر وضوحًا، أسرع، وأكثر تنظيمًا.</p>
         </div>
-      </div>
 
-      <div class="section">
-        <div class="wrap">
-          <div class="cards">
-            <article class="card">
-              <div class="card-icon">🧭</div>
-              <h3>لوحة تحكم موحدة</h3>
-              <p>مركز معلومات واحد يضم الحجوزات، العقود، الرسوم، والفريق في واجهة واحدة.</p>
-            </article>
-            <article class="card">
-              <div class="card-icon">🗂️</div>
-              <h3>إدارة العملاء</h3>
-              <p>تخزين بيانات العملاء، تفاصيل الحجز، وتفاصيل الطلب مع سهولة الوصول إليها.</p>
-            </article>
-            <article class="card">
-              <div class="card-icon">🧮</div>
-              <h3>حسابات دقيقة</h3>
-              <p>تتبع الرسوم والفواتير والخصومات بشكل منظم يمنع أي أخطاء في الحسابات.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="fleet">
-      <div class="page-hero">
-        <div class="wrap">
-          <div class="crumb">الرئيسية / إدارة الأسطول</div>
-          <h1>إدارة الأسطول برؤية أوضح</h1>
-          <p>راقب كل مركبة، تفاعل مع حالة الاستخدام، ووفّر الوقت من خلال متابعة واضحة لكل سيارة في الأسطول.</p>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="wrap">
-          <div class="notice">المنصة تسمح لك بمتابعة حالة كل سيارة، توافرها، ومراجعة الطلبات المرتبطة بها من صفحة واحدة.</div>
-          <div class="fleet-list">
-            <article class="fleet-card">
-              <div class="fleet-image"></div>
-              <div class="fleet-info">
-                <h3>سيارة عائلية</h3>
-                <p>متاحة حاليًا، سعة 5 ركاب، مناسبة للعائلات والسياحة الداخلية.</p>
-              </div>
-            </article>
-            <article class="fleet-card">
-              <div class="fleet-image" style="background:linear-gradient(135deg,#f9ecde,#f3f2ef)"></div>
-              <div class="fleet-info">
-                <h3>سيارة رجال أعمال</h3>
-                <p>مناسب للرحلات الطويلة مع راحة عالية، وكفاءة في الأداء اليومي.</p>
-              </div>
-            </article>
-            <article class="fleet-card">
-              <div class="fleet-image" style="background:linear-gradient(135deg,#f7e4d3,#f0efe9)"></div>
-              <div class="fleet-info">
-                <h3>سيارة فاخرة</h3>
-                <p>للاستخدام الربعي والتنقلات المميزة، مع خدمة مخصصة لعملاء VIP.</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="pricing">
-      <div class="page-hero">
-        <div class="wrap">
-          <div class="crumb">الرئيسية / الباقات</div>
-          <h1>اختر الباقة المناسبة لنشاطك</h1>
-          <p>احصل على خطة مرنة تناسب حجم نشاطك، مع دعم مخصص وتخصيص واضح للطلبات التشغيلية.</p>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="wrap">
-          <div class="pricing-grid">
-            <article class="price-card">
-              <h3>الأساسية</h3>
-              <div class="price">299 <small>ريال/شهري</small></div>
-              <ul>
-                <li>إدارة الحجوزات الأساسية</li>
-                <li>مؤشرات أداء أساسية</li>
-                <li>مركز دعم عبر البريد</li>
-              </ul>
-              <button class="btn ghost" onclick="navigate('contact')">ابدأ الآن</button>
-            </article>
-
-            <article class="price-card popular">
-              <span class="popular-label">الأكثر طلبًا</span>
-              <h3>المتقدمة</h3>
-              <div class="price">599 <small>ريال/شهري</small></div>
-              <ul>
-                <li>كل مميزات الأساسية</li>
-                <li>تقارير متقدمة ونماذج مخصصة</li>
-                <li>إشعارات ذكية وعمليات أتمتة</li>
-              </ul>
-              <button class="btn" onclick="navigate('contact')">اختيار هذه الباقة</button>
-            </article>
-
-            <article class="price-card">
-              <h3>المخصصة</h3>
-              <div class="price">حسب الطلب</div>
-              <ul>
-                <li>حلول مخصصة للشركات الكبيرة</li>
-                <li>تخصيص واجهة بحسب النشاط</li>
-                <li>دعم فني متقدم</li>
-              </ul>
-              <button class="btn ghost" onclick="navigate('contact')">طلب استشارة</button>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="about">
-      <div class="page-hero">
-        <div class="wrap">
-          <div class="crumb">الرئيسية / عن المنصة</div>
-          <h1>تقنية تجعل تفاصيل العمل أوضح</h1>
-          <p>تم تصميم المنصة لتعطيك رؤية دقيقة حول كل جزء من عملياتك، سواء كان هذا في الحجز، العقود، أو إدارة الأسطول.</p>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="wrap two-col">
-          <div>
-            <div class="eyebrow">عن المنصة</div>
-            <h2 class="content-title">تصميم مبني على الاحتياج الحقيقي</h2>
-            <p class="content-copy">منصة إيجار تك تجمع بين الجوانب التشغيلية والتجريبية، لتوفر لك أداة موثوقة تدعم قراراتك اليومية وتبسط عملياتك وتزيد من وضوح البيانات.</p>
-          </div>
-          <div class="device-scene">
-            <div class="laptop">
-              <div class="screen">
-                <div class="brand" style="font-weight:800;color:var(--dark)">إيجار تك</div>
-                <div class="chart"></div>
-                <div class="metrics">
-                  <div class="metric"><strong>99%</strong><br>استقرار</div>
-                  <div class="metric"><strong>24/7</strong><br>مراقبة</div>
-                  <div class="metric"><strong>3x</strong><br>سرعة</div>
-                </div>
-              </div>
-              <div class="device-line green"></div>
-              <div class="device-line"></div>
+        <div class="device-showcase">
+          <div class="device-window">
+            <div class="bars">
+              <span style="height: 28%;"></span>
+              <span style="height: 41%;"></span>
+              <span style="height: 60%;"></span>
+              <span style="height: 78%;"></span>
+              <span style="height: 100%;"></span>
+              <span style="height: 70%;"></span>
+            </div>
+            <div class="metrics">
+              <div class="mini-box"><strong>99%</strong><br>استقرار</div>
+              <div class="mini-box"><strong>24/7</strong><br>دعم</div>
+              <div class="mini-box"><strong>3×</strong><br>سرعة</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="page" id="faq">
-      <div class="page-hero">
-        <div class="wrap">
-          <div class="crumb">الرئيسية / الأسئلة الشائعة</div>
-          <h1>أسئلة شائعة</h1>
-          <p>إجابات سريعة حول طريقة استخدام المنصة، والتخصيص، والدعم الذي توفره لك.</p>
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">تواصل معنا</div>
+          <h2>لنصنع لك تجربة مناسبة لعملك</h2>
+          <p>أخبرنا عن نشاطك، وسنساعدك في اختيار الحزمة المناسبة وتحديد المزايا التي تحتاجها.</p>
         </div>
-      </div>
 
-      <div class="section">
-        <div class="wrap faq">
-          <details open>
-            <summary>هل يمكن تخصيص المنصة حسب نشاطي؟</summary>
-            <p>نعم، يمكن تخصيص الواجهة والوظائف لتناسب نوع نشاطك، سواء كنت تمتلك أسطولاً صغيراً أو شركة كبيرة.</p>
-          </details>
-          <details>
-            <summary>هل يمكن متابعة الحجوزات في الوقت الحقيقي؟</summary>
-            <p>نعم، توفر المنصة تحديثات مباشرة حول حالة الحجز، حالة السيارة، وتاريخ التجديد أو الاستلام.</p>
-          </details>
-          <details>
-            <summary>هل تدعم المنصة الفواتير والتقارير؟</summary>
-            <p>بكل تأكيد، يتم دعم الفواتير، تقارير الإيرادات، ومتابعة الأداء عبر لوحات سهلة القراءة.</p>
-          </details>
-          <details>
-            <summary>هل أستطيع التواصل مع فريق الدعم؟</summary>
-            <p>نعم، يمكن طلب الاستشارة والدعم المباشر من خلال نموذج الاتصال داخل المنصة.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="contact">
-      <div class="page-hero">
-        <div class="wrap">
-          <div class="crumb">الرئيسية / تواصل معنا</div>
-          <h1>ناقش احتياج شركتك مع إيجار تك</h1>
-          <p>أخبرنا عن النشاط الذي تديره، وسنساعدك في اختيار الحزمة والتجهيز المناسب لك.</p>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="wrap">
-          <div class="form-box">
-            <form onsubmit="event.preventDefault(); showToast('تم إرسال طلبك بنجاح، وسيتم التواصل معك قريبًا.'); this.reset();">
-              <div class="fields">
-                <div class="field">
-                  <label>الاسم</label>
-                  <input required placeholder="اكتب اسمك الكامل">
-                </div>
-                <div class="field">
-                  <label>البريد الإلكتروني</label>
-                  <input type="email" required placeholder="name@example.com">
-                </div>
-                <div class="field">
-                  <label>رقم الجوال</label>
-                  <input required placeholder="9665xxxxxxx">
-                </div>
-                <div class="field">
-                  <label>نوع النشاط</label>
-                  <select>
-                    <option>شركة تأجير سيارات</option>
-                    <option>تأجير سيارات ذاتية</option>
-                    <option>أسطول خاص</option>
-                    <option>أخرى</option>
-                  </select>
-                </div>
-                <div class="field full">
-                  <label>رسالتك</label>
-                  <textarea rows="4" placeholder="اكتب احتياجك أو ما الذي تبحث عنه..."></textarea>
-                </div>
+        <div class="contact-box">
+          <form onsubmit="event.preventDefault(); showToast('تم إرسال طلبك بنجاح، وسيتم التواصل معك قريبًا.'); this.reset();">
+            <div class="form-grid">
+              <div class="field">
+                <label>الاسم</label>
+                <input required placeholder="اكتب اسمك بالكامل">
               </div>
-              <div class="submit-row">
-                <button class="btn" type="submit">إرسال الطلب</button>
+              <div class="field">
+                <label>البريد الإلكتروني</label>
+                <input type="email" required placeholder="name@example.com">
               </div>
-            </form>
-          </div>
+              <div class="field">
+                <label>رقم الجوال</label>
+                <input required placeholder="9665xxxxxxxx">
+              </div>
+              <div class="field">
+                <label>نوع النشاط</label>
+                <select>
+                  <option>شركة تأجير سيارات</option>
+                  <option>أسطول خاص</option>
+                  <option>تأجير سيارات ذاتية</option>
+                  <option>أخرى</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label>رسالتك</label>
+                <textarea rows="4" placeholder="اكتب احتياجك أو ما الذي تبحث عنه..."></textarea>
+              </div>
+            </div>
+            <div class="submit-row">
+              <button class="btn primary" type="submit">إرسال الطلب</button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -660,28 +1025,27 @@
     <div class="wrap">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="#home" data-page="home"><span class="brandmark">◆</span> إيجار تك</a>
-          <p>منصة عربية متكاملة لإدارة تأجير السيارات بأسلوب عملي وبسيط.</p>
+          <a class="brand" href="#home"><span class="brandmark">◆</span> إيجار تك</a>
+          <p>منصة عربية تقدم حلولاً عملية لإدارة تأجير السيارات بكفاءة وثقة.</p>
         </div>
         <div>
-          <h4>روابط</h4>
+          <h4>روابط سريعة</h4>
           <div class="footer-links">
-            <a href="#features" data-page="features">المميزات</a>
-            <a href="#fleet" data-page="fleet">الأسطول</a>
-            <a href="#pricing" data-page="pricing">الباقات</a>
+            <a href="#features">المميزات</a>
+            <a href="#fleet">الأسطول</a>
+            <a href="#pricing">الباقات</a>
           </div>
         </div>
         <div>
-          <h4>الشركة</h4>
+          <h4>من نحن</h4>
           <div class="footer-links">
-            <a href="#about" data-page="about">عن المنصة</a>
-            <a href="#faq" data-page="faq">الأسئلة الشائعة</a>
-            <a href="#contact" data-page="contact">تواصل معنا</a>
+            <a href="#about">عن المنصة</a>
+            <a href="#contact">تواصل معنا</a>
           </div>
         </div>
         <div>
           <h4>معلومات</h4>
-          <p>منصة لإدارة الخدمات وعقود السيارات بأسلوب محدد وموثوق.</p>
+          <p>منصة لإدارة الحجوزات، العقود، وأداء الأسطول بشكل متكامل.</p>
         </div>
       </div>
       <div class="copyright">© 2026 إيجار تك. جميع الحقوق محفوظة.</div>
@@ -691,32 +1055,19 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    const pageIds=['home','features','fleet','pricing','about','faq','contact'];
-    function navigate(id){
-      if(!pageIds.includes(id)) id='home';
-      document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active', p.id===id));
-      document.querySelectorAll('[data-page]').forEach(a=>a.classList.toggle('active', a.dataset.page===id));
-      document.getElementById('nav')?.classList.remove('open');
-      history.replaceState(null,'', '#'+id);
-      window.scrollTo({top:0,behavior:'smooth'});
-    }
-
-    document.querySelectorAll('[data-page]').forEach(a=>a.addEventListener('click',e=>{
-      e.preventDefault();
-      navigate(a.dataset.page);
-    }));
-
-    function showToast(msg){
-      const t=document.getElementById('toast');
-      t.textContent=msg;
-      t.style.display='block';
-      setTimeout(()=>t.style.display='none',4200);
-    }
-
-    window.addEventListener('load',()=>{
-      let id=location.hash.slice(1);
-      if(pageIds.includes(id)) navigate(id);
+    const nav = document.getElementById('nav');
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+      });
     });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 4000);
+    }
   </script>
 </body>
 </html>

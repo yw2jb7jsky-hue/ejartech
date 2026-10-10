@@ -4,32 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>إيجار تك | منصة إدارة تأجير السيارات</title>
-    <meta
-      name="description"
-      content="منصة متكاملة لإدارة تأجير السيارات تشمل الحجوزات، العقود، الأسطول، والفواتير بكفاءة عالية وتجربة احترافية."
-    />
+    <meta name="description" content="منصة متكاملة لإدارة تأجير السيارات تشمل الحجوزات، العقود، الأسطول، والفواتير بكفاءة عالية وتجربة احترافية." />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 
       :root {
-        --bg: #0f1117;
-        --bg-2: #171d28;
-        --bg-3: #10161f;
-        --panel: rgba(255,255,255,0.06);
-        --panel-strong: rgba(255,255,255,0.1);
-        --line: rgba(255,255,255,0.12);
-        --text: #eef3ff;
-        --muted: #a7b2c7;
-        --gold: #f8b15d;
-        --gold-2: #f09d43;
-        --gold-soft: rgba(248,177,93,0.16);
-        --blue: #5aa7ff;
-        --blue-soft: rgba(90,167,255,0.14);
-        --green: #62d5b0;
-        --danger: #ff8b7b;
-        --shadow: rgba(0,0,0,0.28);
+        --bg: #0b0f14;
+        --bg-2: #121a22;
+        --bg-3: #0d131a;
+        --panel: rgba(255,255,255,0.04);
+        --line: rgba(255,255,255,0.1);
+        --text: #edf3ff;
+        --muted: #adbbd1;
+        --gold: #f7b76b;
+        --gold-2: #ef9b46;
+        --orange: #ff9a4d;
+        --blue: #68a6ff;
+        --green: #72d7b3;
+        --shadow: rgba(0,0,0,0.32);
         --white: #ffffff;
-        --radius: 22px;
+        --radius: 24px;
       }
 
       * { box-sizing: border-box; }
@@ -38,8 +32,8 @@
         margin: 0;
         font-family: 'Cairo', sans-serif;
         background:
-          radial-gradient(circle at top right, rgba(248,177,93,0.18), transparent 20%),
-          radial-gradient(circle at top left, rgba(90,167,255,0.16), transparent 18%),
+          radial-gradient(circle at top right, rgba(247,183,107,0.12), transparent 18%),
+          radial-gradient(circle at left center, rgba(104,166,255,0.12), transparent 22%),
           linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
         color: var(--text);
         line-height: 1.8;
@@ -47,24 +41,16 @@
 
       a { color: inherit; text-decoration: none; }
       img { max-width: 100%; display: block; }
-      button, input, select, textarea {
-        font: inherit;
-      }
-      button {
-        cursor: pointer;
-        border: none;
-      }
-      .container {
-        width: min(1180px, calc(100% - 32px));
-        margin: 0 auto;
-      }
+      button, input, select, textarea { font: inherit; }
+      button { cursor: pointer; border: none; }
+      .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
 
       .topbar {
         position: sticky;
         top: 0;
         z-index: 50;
         backdrop-filter: blur(14px);
-        background: rgba(16, 22, 31, 0.66);
+        background: rgba(11, 15, 20, 0.68);
         border-bottom: 1px solid var(--line);
       }
       .topbar-inner {
@@ -85,40 +71,28 @@
       .brand-mark {
         width: 38px;
         height: 38px;
-        border-radius: 12px;
         display: grid;
         place-items: center;
+        border-radius: 12px;
         background: linear-gradient(135deg, var(--gold), var(--gold-2));
-        color: var(--bg);
-        font-size: 1.05rem;
-        box-shadow: 0 16px 30px rgba(248,177,93,0.25);
+        color: #1a120c;
+        box-shadow: 0 14px 30px rgba(247,183,107,0.25);
       }
       .nav {
         display: flex;
         align-items: center;
         gap: 24px;
         color: var(--muted);
-        font-size: 0.96rem;
+        font-size: 0.95rem;
         font-weight: 600;
       }
-      .nav a {
-        transition: 0.25s ease;
-        opacity: 0.9;
-      }
-      .nav a:hover,
-      .nav a.active {
-        color: var(--white);
-      }
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
+      .nav a { transition: 0.24s ease; }
+      .nav a:hover, .nav a.active { color: var(--white); }
+      .header-actions { display: flex; align-items: center; gap: 12px; }
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
         padding: 14px 22px;
         border-radius: 14px;
         font-weight: 800;
@@ -127,17 +101,15 @@
       .btn:hover { transform: translateY(-1px); }
       .btn.primary {
         background: linear-gradient(135deg, var(--gold), var(--gold-2));
-        color: #1a130d;
-        box-shadow: 0 18px 34px rgba(248,177,93,0.2);
+        color: #1b140f;
+        box-shadow: 0 18px 34px rgba(247,183,107,0.24);
       }
       .btn.secondary {
-        background: rgba(255,255,255,0.04);
+        background: rgba(255,255,255,0.03);
         color: var(--text);
         border: 1px solid var(--line);
       }
-      .menu-btn {
-        display: none;
-      }
+      .menu-btn { display: none; }
 
       .hero {
         position: relative;
@@ -148,19 +120,19 @@
         position: absolute;
         inset: 0;
         background-image:
-          linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-        background-size: 46px 46px;
-        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+          linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(circle at center, black 36%, transparent 100%);
       }
       .hero-inner {
         position: relative;
         display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
+        grid-template-columns: 1.06fr 0.94fr;
+        gap: 32px;
         align-items: center;
-        gap: 30px;
-        min-height: 660px;
-        padding: 60px 0 40px;
+        min-height: 680px;
+        padding: 64px 0 42px;
       }
       .eyebrow {
         display: inline-flex;
@@ -168,10 +140,10 @@
         gap: 10px;
         padding: 10px 16px;
         border-radius: 999px;
-        background: rgba(248,177,93,0.12);
-        border: 1px solid rgba(248,177,93,0.18);
+        background: rgba(247,183,107,0.12);
+        border: 1px solid rgba(247,183,107,0.2);
         color: var(--text);
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         font-weight: 700;
       }
       .eyebrow::before {
@@ -180,18 +152,15 @@
         height: 8px;
         border-radius: 50%;
         background: var(--gold);
-        box-shadow: 0 0 12px rgba(248,177,93,0.8);
+        box-shadow: 0 0 14px rgba(247,183,107,0.8);
       }
       h1 {
         margin: 20px 0 18px;
-        font-size: clamp(2.5rem, 5vw, 5rem);
-        line-height: 1.08;
-        letter-spacing: -0.05em;
+        font-size: clamp(2.9rem, 5vw, 5.2rem);
+        line-height: 1.06;
+        letter-spacing: -0.06em;
       }
-      h1 .accent {
-        display: inline-block;
-        color: var(--gold);
-      }
+      h1 .accent { color: var(--gold); }
       .lead {
         max-width: 620px;
         margin: 0;
@@ -202,29 +171,29 @@
         display: flex;
         flex-wrap: wrap;
         gap: 14px;
-        margin-top: 28px;
+        margin-top: 30px;
       }
       .hero-metrics {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0,1fr));
         gap: 16px;
-        margin-top: 32px;
+        margin-top: 34px;
       }
       .metric-box {
         padding: 18px 16px;
-        border: 1px solid var(--line);
+        border-radius: 18px;
         background: rgba(255,255,255,0.03);
-        border-radius: 16px;
+        border: 1px solid var(--line);
       }
       .metric-box strong {
         display: block;
         font-size: 1.8rem;
-        color: var(--gold);
         line-height: 1.1;
+        color: var(--gold);
       }
       .metric-box span {
         color: var(--muted);
-        font-size: 0.8rem;
+        font-size: 0.76rem;
       }
 
       .showcase {
@@ -234,46 +203,60 @@
       }
       .dashboard {
         position: relative;
-        width: min(100%, 520px);
+        width: min(100%, 540px);
         min-height: 500px;
         border-radius: 30px;
-        border: 1px solid rgba(248,177,93,0.2);
-        background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-        box-shadow: 0 30px 80px rgba(0,0,0,0.24);
         overflow: hidden;
+        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+        border: 1px solid rgba(247,183,107,0.18);
+        box-shadow: 0 30px 90px rgba(0,0,0,0.26);
       }
       .dashboard::before {
         content: "";
         position: absolute;
-        inset: 14% -10% auto auto;
-        width: 260px;
-        height: 260px;
+        inset: -10% -8% auto auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(247,183,107,0.18), transparent 60%);
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(248,177,93,0.22), transparent 60%);
       }
       .dashboard-header {
-        padding: 16px 18px 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 16px 18px 10px;
         border-bottom: 1px solid var(--line);
       }
-      .window-dots {
-        display: flex;
-        gap: 8px;
-      }
+      .window-dots { display: flex; gap: 8px; }
       .window-dots span {
         width: 11px;
         height: 11px;
         border-radius: 50%;
         background: rgba(255,255,255,0.28);
       }
-      .window-dots span:nth-child(1) { background: #ff7f7f; }
-      .window-dots span:nth-child(2) { background: #ffd36b; }
-      .window-dots span:nth-child(3) { background: #77df8b; }
-      .dashboard-body {
-        padding: 18px;
+      .window-dots span:nth-child(1) { background: #ff7e7e; }
+      .window-dots span:nth-child(2) { background: #ffd86a; }
+      .window-dots span:nth-child(3) { background: #7be39a; }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: rgba(104,166,255,0.12);
+        border: 1px solid rgba(104,166,255,0.2);
+        color: var(--white);
+        font-weight: 700;
+        font-size: 0.8rem;
       }
+      .chip::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+      .dashboard-body { padding: 18px; }
       .top-panel {
         display: grid;
         grid-template-columns: 1.1fr 0.9fr;
@@ -285,44 +268,33 @@
         border-radius: 18px;
         padding: 16px;
       }
+      .mini-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
       .bar-chart {
         display: flex;
         align-items: end;
         gap: 10px;
-        height: 130px;
-        padding-top: 24px;
+        height: 138px;
+        padding-top: 22px;
       }
       .bar-chart span {
         flex: 1;
-        border-radius: 12px 12px 6px 6px;
-        background: linear-gradient(180deg, rgba(90,167,255,0.95), rgba(248,177,93,0.8));
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+        border-radius: 12px 12px 8px 8px;
+        background: linear-gradient(180deg, rgba(104,166,255,0.9), rgba(247,183,107,0.86));
       }
       .legend {
         display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        margin-top: 14px;
-        color: var(--muted);
-        font-size: 0.76rem;
-      }
-      .chip {
-        display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 9px 12px;
-        background: rgba(90,167,255,0.12);
-        border: 1px solid rgba(90,167,255,0.22);
-        border-radius: 999px;
-        color: var(--white);
-        font-weight: 700;
-      }
-      .chip::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--blue);
+        justify-content: space-between;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.74rem;
       }
       .summary-grid {
         display: grid;
@@ -331,10 +303,10 @@
         margin-top: 18px;
       }
       .summary-item {
+        padding: 14px 12px;
+        border-radius: 16px;
         background: rgba(255,255,255,0.04);
         border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 14px 12px;
       }
       .summary-item small {
         display: block;
@@ -345,24 +317,17 @@
         display: block;
         margin-top: 8px;
         font-size: 1.5rem;
-        color: var(--text);
       }
       .floating-card {
         position: absolute;
         left: -18px;
-        bottom: 32px;
+        bottom: 30px;
         width: 200px;
-        background: rgba(13,18,25,0.9);
-        border: 1px solid rgba(248,177,93,0.2);
+        background: rgba(10,14,20,0.92);
+        border: 1px solid rgba(247,183,107,0.18);
         border-radius: 20px;
         padding: 16px 18px;
-        box-shadow: 0 22px 40px rgba(0,0,0,0.25);
-      }
-      .mini-title {
-        display: flex;
-        justify-content: space-between;
-        color: var(--muted);
-        font-size: 0.76rem;
+        box-shadow: 0 24px 42px rgba(0,0,0,0.26);
       }
       .mini-stat {
         display: flex;
@@ -379,13 +344,11 @@
         color: var(--green);
       }
 
-      section {
-        padding: 90px 0;
-      }
+      section { padding: 90px 0; }
       .section-head {
-        text-align: center;
         max-width: 760px;
         margin: 0 auto 42px;
+        text-align: center;
       }
       .section-head h2 {
         margin: 10px 0 8px;
@@ -395,21 +358,22 @@
       .section-head p {
         margin: 0;
         color: var(--muted);
-        font-size: 1.04rem;
+        font-size: 1.02rem;
       }
+
       .feature-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0,1fr));
-        gap: 24px;
+        gap: 22px;
       }
       .feature-card {
         position: relative;
+        overflow: hidden;
         padding: 28px 22px;
         border-radius: var(--radius);
         background: rgba(255,255,255,0.03);
         border: 1px solid var(--line);
         box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        overflow: hidden;
       }
       .feature-card::before {
         content: "";
@@ -425,9 +389,9 @@
         display: grid;
         place-items: center;
         border-radius: 18px;
-        background: rgba(248,177,93,0.12);
-        border: 1px solid rgba(248,177,93,0.18);
-        font-size: 1.6rem;
+        background: rgba(247,183,107,0.12);
+        border: 1px solid rgba(247,183,107,0.18);
+        font-size: 1.5rem;
       }
       .feature-card h3 {
         margin: 18px 0 8px;
@@ -440,7 +404,7 @@
 
       .split {
         display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
+        grid-template-columns: 1.04fr 0.96fr;
         gap: 34px;
         align-items: center;
       }
@@ -449,9 +413,8 @@
         font-size: clamp(2rem, 2.7vw, 3rem);
       }
       .split-copy p {
-        color: var(--muted);
         margin: 0;
-        font-size: 1.02rem;
+        color: var(--muted);
       }
       .benefits {
         display: grid;
@@ -474,7 +437,8 @@
         border-radius: 12px;
         display: grid;
         place-items: center;
-        background: rgba(98,213,176,0.12);
+        flex-shrink: 0;
+        background: rgba(114,215,179,0.12);
         color: var(--green);
         font-weight: 900;
       }
@@ -486,27 +450,19 @@
         color: var(--muted);
       }
       .info-panel {
-        border-radius: 32px;
-        border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
         padding: 20px;
-        box-shadow: 0 26px 60px rgba(0,0,0,0.18);
+        border-radius: 32px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+        border: 1px solid var(--line);
       }
       .info-board {
-        background: rgba(16,22,31,0.75);
-        border: 1px solid var(--line);
-        border-radius: 24px;
         padding: 18px;
+        border-radius: 24px;
+        background: rgba(11, 15, 20, 0.78);
+        border: 1px solid var(--line);
       }
-      .progress-row {
-        display: grid;
-        gap: 22px;
-        margin-top: 18px;
-      }
-      .progress-item {
-        display: grid;
-        gap: 8px;
-      }
+      .progress-row { display: grid; gap: 18px; margin-top: 18px; }
+      .progress-item { display: grid; gap: 8px; }
       .progress-label {
         display: flex;
         justify-content: space-between;
@@ -516,8 +472,8 @@
       .progress-track {
         height: 12px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.06);
         overflow: hidden;
+        background: rgba(255,255,255,0.06);
       }
       .progress-bar {
         height: 100%;
@@ -544,12 +500,13 @@
       }
       .mini-box span {
         color: var(--muted);
-        font-size: 0.73rem;
+        font-size: 0.72rem;
       }
 
+      .process { background: rgba(255,255,255,0.02); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
       .fleet-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0,1fr));
         gap: 22px;
       }
       .fleet-card {
@@ -557,17 +514,29 @@
         border-radius: 22px;
         background: rgba(255,255,255,0.03);
         border: 1px solid var(--line);
+        transition: transform 0.28s ease, box-shadow 0.28s ease;
+      }
+      .fleet-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 24px 56px rgba(247,183,107,0.08);
       }
       .fleet-image {
-        height: 210px;
+        height: 240px;
         background-size: cover;
         background-position: center;
+        position: relative;
+      }
+      .fleet-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 45%, rgba(11,15,20,0.62));
       }
       .fleet-body {
-        padding: 18px 18px 22px;
+        padding: 22px 20px 24px;
       }
       .fleet-body h3 {
-        margin: 0 0 8px;
+        margin: 0 0 10px;
         font-size: 1.5rem;
       }
       .fleet-body p {
@@ -575,22 +544,16 @@
         color: var(--muted);
       }
 
-      .process {
-        background: rgba(255,255,255,0.02);
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-      }
       .process-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0,1fr));
         gap: 20px;
       }
       .step {
-        position: relative;
         padding: 22px 18px;
         border-radius: 20px;
-        border: 1px solid var(--line);
         background: rgba(255,255,255,0.03);
+        border: 1px solid var(--line);
       }
       .step-num {
         display: inline-flex;
@@ -599,11 +562,11 @@
         width: 42px;
         height: 42px;
         border-radius: 14px;
-        background: rgba(248,177,93,0.12);
-        border: 1px solid rgba(248,177,93,0.18);
-        font-weight: 900;
-        color: var(--gold);
         margin-bottom: 14px;
+        background: rgba(247,183,107,0.12);
+        border: 1px solid rgba(247,183,107,0.18);
+        color: var(--gold);
+        font-weight: 900;
       }
       .step h3 {
         margin: 0 0 8px;
@@ -620,25 +583,24 @@
         gap: 20px;
       }
       .price-card {
-        position: relative;
         padding: 26px 22px;
-        border-radius: 24px;
+        border-radius: 22px;
         background: rgba(255,255,255,0.03);
         border: 1px solid var(--line);
       }
       .price-card.featured {
-        border-color: rgba(248,177,93,0.4);
-        background: linear-gradient(180deg, rgba(248,177,93,0.06), rgba(255,255,255,0.03));
-        box-shadow: 0 20px 48px rgba(248,177,93,0.08);
+        border-color: rgba(247,183,107,0.4);
+        background: linear-gradient(180deg, rgba(247,183,107,0.06), rgba(255,255,255,0.02));
+        box-shadow: 0 20px 52px rgba(247,183,107,0.08);
       }
       .popular-tag {
         display: inline-flex;
         padding: 6px 12px;
         border-radius: 999px;
-        background: rgba(248,177,93,0.12);
-        border: 1px solid rgba(248,177,93,0.18);
+        background: rgba(247,183,107,0.12);
+        border: 1px solid rgba(247,183,107,0.18);
         color: var(--gold);
-        font-size: 0.75rem;
+        font-size: 0.74rem;
         font-weight: 800;
       }
       .price-card h3 {
@@ -669,10 +631,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 20px;
-        padding: 24px 28px;
+        padding: 26px 30px;
         border-radius: 24px;
-        background: linear-gradient(90deg, rgba(248,177,93,0.1), rgba(90,167,255,0.08));
-        border: 1px solid rgba(248,177,93,0.2);
+        border: 1px solid rgba(247,183,107,0.2);
+        background: linear-gradient(90deg, rgba(247,183,107,0.08), rgba(104,166,255,0.08));
       }
       .cta-banner h3 {
         margin: 0 0 6px;
@@ -708,11 +670,11 @@
       .field select,
       .field textarea {
         width: 100%;
-        border: 1px solid var(--line);
+        padding: 14px 14px;
         border-radius: 14px;
         background: rgba(255,255,255,0.03);
+        border: 1px solid var(--line);
         color: var(--text);
-        padding: 14px 14px;
         outline: none;
       }
       .field textarea {
@@ -722,17 +684,14 @@
       .field input:focus,
       .field select:focus,
       .field textarea:focus {
-        border-color: rgba(248,177,93,0.6);
-        box-shadow: 0 0 0 3px rgba(248,177,93,0.12);
+        border-color: rgba(247,183,107,0.6);
+        box-shadow: 0 0 0 3px rgba(247,183,107,0.12);
       }
-      .submit-wrap {
-        margin-top: 16px;
-        text-align: center;
-      }
+      .submit-wrap { margin-top: 18px; text-align: center; }
 
       .footer {
         padding-top: 22px;
-        padding-bottom: 28px;
+        padding-bottom: 26px;
         color: var(--muted);
       }
       .footer-grid {
@@ -752,10 +711,7 @@
         color: var(--white);
         font-size: 1.05rem;
       }
-      .footer-links {
-        display: grid;
-        gap: 8px;
-      }
+      .footer-links { display: grid; gap: 8px; }
       .copyright {
         border-top: 1px solid var(--line);
         padding-top: 16px;
@@ -771,10 +727,10 @@
         max-width: 360px;
         padding: 14px 18px;
         border-radius: 14px;
-        background: rgba(15,17,23,0.96);
-        border: 1px solid rgba(248,177,93,0.18);
+        background: rgba(9,13,17,0.96);
         color: var(--white);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+        border: 1px solid rgba(247,183,107,0.18);
+        box-shadow: 0 22px 52px rgba(0,0,0,0.28);
         display: none;
         z-index: 60;
       }
@@ -787,16 +743,14 @@
           top: 80px;
           right: 0;
           left: 0;
-          padding: 18px 24px;
           flex-direction: column;
           align-items: flex-start;
-          background: rgba(16,22,31,0.95);
+          padding: 18px 24px;
+          background: rgba(11,15,20,0.96);
           border-bottom: 1px solid var(--line);
         }
         .menu-btn { display: inline-flex; }
-        .hero-inner, .split, .feature-grid, .fleet-grid, .pricing-grid, .process-grid, .footer-grid, .form-grid {
-          grid-template-columns: 1fr;
-        }
+        .hero-inner, .split, .feature-grid, .fleet-grid, .pricing-grid, .process-grid, .form-grid, .footer-grid { grid-template-columns: 1fr; }
         .top-panel { grid-template-columns: 1fr; }
       }
       @media (max-width: 640px) {
@@ -838,9 +792,9 @@
         <div class="container hero-inner">
           <div>
             <span class="eyebrow">منصة إدارة متكاملة</span>
-            <h1>أحدث أسلوب لإدارة <span class="accent">تأجير السيارات</span></h1>
+            <h1>أسطولك يتحرك بسرعة،<br><span class="accent">وأعمالك تنمو بثقة.</span></h1>
             <p class="lead">
-              منصة عصرية تساعدك على تنظيم الحجوزات، متابعة العقود، إدارة الأسطول، وتحليل الأداء في لوحة واحدة مصممة لتسريع العمليات وزيادة رضا العملاء.
+              منصة احترافية لإدارة تأجير السيارات تجمع بين الحجز، العقود، الأسطول، الإنتاجية، والفواتير في واجهة واحدة، لتجعل تشغيلك أسهل وأكثر كفاءة.
             </p>
 
             <div class="hero-actions">
@@ -879,12 +833,12 @@
                       <span>+18.4%</span>
                     </div>
                     <div class="bar-chart">
-                      <span style="height: 38%"></span>
-                      <span style="height: 52%"></span>
-                      <span style="height: 60%"></span>
-                      <span style="height: 72%"></span>
-                      <span style="height: 91%"></span>
-                      <span style="height: 76%"></span>
+                      <span style="height: 34%"></span>
+                      <span style="height: 50%"></span>
+                      <span style="height: 62%"></span>
+                      <span style="height: 74%"></span>
+                      <span style="height: 92%"></span>
+                      <span style="height: 79%"></span>
                     </div>
                     <div class="legend">
                       <span>يونيو</span>
@@ -946,27 +900,27 @@
         <div class="container">
           <div class="section-head">
             <span class="eyebrow">لماذا المنصة؟</span>
-            <h2>تصميم يركز على السرعة والثقة والوضوح</h2>
-            <p>تم بناء المنصة لتغطي كل خطوة من الحجز إلى التسليم، مع تجربة مستخدم خالية من التعقيد وتسهيل إدارتك اليومية.</p>
+            <h2>حلّ متكامل يعزز الإنتاجية والسرعة</h2>
+            <p>تم تصميم المنصة لتغطي كل مرحلة من الحجز إلى التسليم، مع تحكم كامل في الأسطول، ومتابعة دقيقة للتقارير والعمليات.</p>
           </div>
 
           <div class="feature-grid">
             <article class="feature-card">
               <div class="feature-icon">⚙️</div>
               <h3>إدارة العمليات</h3>
-              <p>تابع كل طلب، كل عقد، وكل سيارة من نقطة واحدة دون تقطيع العمل أو التشتت بين الأدوات.</p>
+              <p>تابع كل طلب، كل عقد، وكل سيارة من نقطة واحدة دون عناء أو تشتت بين الأدوات.</p>
             </article>
 
             <article class="feature-card">
               <div class="feature-icon">📊</div>
-              <h3>تقارير فورية</h3>
-              <p>احصل على مؤشرات الأداء ومتوسط الإيرادات وساعات التشغيل بشكل فوري لتحسين القرارات.</p>
+              <h3>تقارير دقيقة</h3>
+              <p>احصل على تقارير فورية عن الإيرادات، عدد الحجوزات، ومعدل استخدام كل سيارة وموظف.</p>
             </article>
 
             <article class="feature-card">
               <div class="feature-icon">💬</div>
               <h3>تواصل ذكي</h3>
-              <p>إرسال تنبيهات للعملاء والموظفين بشكل أوتوماتيكي يقلل التأخير ويحسن مستوى الخدمة.</p>
+              <p>أرسل التنبيهات إلى العملاء والموظفين بشكل أوتوماتيكي لتقليل التأخير وتحسين الخدمة.</p>
             </article>
           </div>
         </div>
@@ -976,8 +930,8 @@
         <div class="container split">
           <div class="split-copy">
             <span class="eyebrow">مزايا عملية</span>
-            <h2>منصة مصممة لتوسع نشاطك دون تعقيد</h2>
-            <p>تجمع المنصة بين تجربة فنية حديثة وسهولة في الاستخدام، ما يساعدك على إدارة الأسطول بكفاءة عالية مع زيادة التزام العملاء وخدمة أكثر احترافية.</p>
+            <h2>منصة مصممة لتوسيع نشاطك بوضوح وثقة</h2>
+            <p>تجمع المنصة بين تجربة مستخدم احترافية وسهولة تشغيل كبيرة، ما يمنحك إدارة أسطول أكثر كفاءة، وبنية واضحة للقرارات اليومية.</p>
 
             <div class="benefits">
               <div class="benefit">
@@ -992,23 +946,23 @@
                 <div class="benefit-mark">✓</div>
                 <div>
                   <strong>مراقبة مستمرة</strong>
-                  <small>تتابع حالة كل سياره وكل عقد من شاشة واحدة.</small>
+                  <small>تتابع كل سيارة وكل عقد من شاشة واحدة.</small>
                 </div>
               </div>
 
               <div class="benefit">
                 <div class="benefit-mark">✓</div>
                 <div>
-                  <strong>تجربة ممتعة</strong>
-                  <small>واجهة أنيقة وخطوات واضحة تعزز رضا العميل.</small>
+                  <strong>تجربة عميل ممتازة</strong>
+                  <small>واجهة أنيقة ومريحة تجعل الحجز أسهل.</small>
                 </div>
               </div>
 
               <div class="benefit">
                 <div class="benefit-mark">✓</div>
                 <div>
-                  <strong>قرارات ذكية</strong>
-                  <small>بيانات دقيقة تخدم اتخاذ القرار دون Guesswork.</small>
+                  <strong>قرارات مبنية على بيانات</strong>
+                  <small>تقارير تُمكِّن صاحب العمل من اتخاذ قرارات أفضل.</small>
                 </div>
               </div>
             </div>
@@ -1061,32 +1015,32 @@
         <div class="container">
           <div class="section-head">
             <span class="eyebrow">إدارة الأسطول</span>
-            <h2>راقب كل سيارة وكل حركة في وقت واحد</h2>
-            <p>من خلال لوحة متكاملة، يمكنك معرفة حالة كل سيارة، توفيرها، استخداماتها، ومواعيد الاستلام والتسليم بدقة كاملة.</p>
+            <h2>راقب كل سيارة وكل حركة في الوقت الحقيقي</h2>
+            <p>من خلال لوحة متكاملة، يمكنك معرفة حالة كل سيارة، توفرها، استخداماتها، ومواعيد التسليم والاستلام بدقة كاملة.</p>
           </div>
 
           <div class="fleet-grid">
             <article class="fleet-card">
-              <div class="fleet-image" style="background:linear-gradient(135deg,#d9e9fb,#eef4ff), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;"></div>
+              <div class="fleet-image" style="background: linear-gradient(135deg, rgba(196,214,245,0.5), rgba(242,247,255,0.5)), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;"></div>
               <div class="fleet-body">
                 <h3>سيارات عائلية</h3>
-                <p>مناسبة للرحلات الداخلية والعائلات مع متابعة دقيقة للتوفر ومواعيد العودة.</p>
+                <p>مناسبة للرحلات الداخلية والعائلات مع متابعة دقيقة لتوفر السيارة ومواعيد العودة.</p>
               </div>
             </article>
 
             <article class="fleet-card">
-              <div class="fleet-image" style="background:linear-gradient(135deg,#e9d9c8,#f7efe9), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;"></div>
+              <div class="fleet-image" style="background: linear-gradient(135deg, rgba(238,219,201,0.5), rgba(247,240,233,0.5)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;"></div>
               <div class="fleet-body">
                 <h3>سيارات رجال أعمال</h3>
-                <p>أفضل خيار للرحلات الطويلة والزيارات الرسمية مع سهولة في الجدولة والتنظيم.</p>
+                <p>خيار مثالي للرحلات الطويلة والزيارات الرسمية مع سهولة في الجدولة والتنسيق.</p>
               </div>
             </article>
 
             <article class="fleet-card">
-              <div class="fleet-image" style="background:linear-gradient(135deg,#f9e5d1,#fff5eb), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;"></div>
+              <div class="fleet-image" style="background: linear-gradient(135deg, rgba(245,228,206,0.5), rgba(255,248,240,0.5)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;"></div>
               <div class="fleet-body">
                 <h3>سيارات فاخرة</h3>
-                <p>خدمة عالية المستوى للعملاء الذين يبحثون عن تجربة راقية وسريعة ومميزة.</p>
+                <p>تتمتع بتجربة راقية ومميزة للعملاء الذين يبحثون عن جودة واحترافية عالية.</p>
               </div>
             </article>
           </div>
@@ -1098,32 +1052,32 @@
           <div class="section-head">
             <span class="eyebrow">حالات الاستخدام</span>
             <h2>كيف تعمل المنصة؟</h2>
-            <p>تدفق واضح ومباشر يجعلك تتبع كل حالة من الطلب إلى التوصيل دون أي تعقيد.</p>
+            <p>تدفق واضح ومباشر يمنحك متابعة سهلة لكل حالة من الطلب إلى التسليم.</p>
           </div>
 
           <div class="process-grid">
             <div class="step">
               <div class="step-num">01</div>
               <h3>اختر السيارة</h3>
-              <p>حدد نوع السيارة، المدة، والخدمات المطلوبة حسب احتياج العميل.</p>
+              <p>حدد نوع السيارة، مدة التأجير، والخدمات المطلوبة بحسب احتياج العميل.</p>
             </div>
 
             <div class="step">
               <div class="step-num">02</div>
               <h3>تأكيد الحجز</h3>
-              <p>قم بمراجعة الطلب وتحديد مواعيد التسليم والاستلام بشكل فوري.</p>
+              <p>راجع الطلب وتحديد مواقع الاستلام والتسليم في وقت قصير مع تنبيهات فورية.</p>
             </div>
 
             <div class="step">
               <div class="step-num">03</div>
               <h3>تمرير العقد</h3>
-              <p>أنشئ العقد والسياسات تلقائياً لتسريع الإجراءات وتقليل الأخطاء.</p>
+              <p>أنشئ العقد والسياسات تلقائيًا لتقليل الأخطاء وتسريع الإجراءات.</p>
             </div>
 
             <div class="step">
               <div class="step-num">04</div>
               <h3>تتبع الأداء</h3>
-              <p>تابع الفواتير، الإيرادات، والطلبات في لوحة تحكم موحدة ومتقدمة.</p>
+              <p>تابع الإيرادات، الفواتير، والكفاءة داخل لوحة تحكم واحدة ومتكاملة.</p>
             </div>
           </div>
         </div>
@@ -1134,7 +1088,7 @@
           <div class="section-head">
             <span class="eyebrow">باقات مناسبة</span>
             <h2>اختر الخطة الأنسب لنشاطك</h2>
-            <p>خطط مرنة تدعم الشركات الصغيرة والمتوسطة والكبيرة مع إمكانية التوسع مع نمو الأعمال.</p>
+            <p>خطط مرنة تدعم الشركات الصغيرة والمتوسطة والكبيرة مع إمكانية التوسع حسب نمو الأعمال.</p>
           </div>
 
           <div class="pricing-grid">
@@ -1183,7 +1137,7 @@
           <div class="cta-banner">
             <div>
               <h3>جاهز لتجربة أقوى لعملك؟</h3>
-              <p>أطلق منظمتك بقوة واحترافية مع منصة تمنحك رؤية كاملة وتحكم فوري.</p>
+              <p>أطلق منظمتك بقوة واحترافية مع منصة تمنحك رؤية كاملة والتحكم الفوري في كل خطوة.</p>
             </div>
             <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">تواصل معنا</button>
           </div>
@@ -1285,7 +1239,6 @@
     <div class="toast" id="toast">تم إرسال طلبك بنجاح.</div>
 
     <script>
-      const nav = document.getElementById('nav');
       const form = document.getElementById('contactForm');
       const toast = document.getElementById('toast');
 

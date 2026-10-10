@@ -21,7 +21,6 @@
       --line: #e8ddd5;
       --dark: #3f3833;
       --shadow: rgba(71, 60, 50, 0.08);
-      --green: #c07d4d;
       --white: #fff;
     }
 
@@ -195,6 +194,97 @@
       line-height: 1.7;
     }
 
+    .floating-road {
+      position: absolute;
+      inset: 8px 0 auto 0;
+      height: 180px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.42;
+      overflow: hidden;
+    }
+    .road-line-top {
+      position: absolute;
+      left: -50%;
+      right: -50%;
+      top: 86px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent 0%, rgba(72,63,58,0.18) 18%, rgba(72,63,58,0.18) 50%, transparent 100%);
+      animation: roadMoveTop 22s linear infinite;
+    }
+    .road-line-top::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent 0 24px, rgba(89,74,63,0.18) 24px 40px, transparent 40px 68px);
+    }
+    .top-car {
+      position: absolute;
+      width: 150px;
+      height: 62px;
+      top: 58px;
+      left: -160px;
+      z-index: 2;
+      animation: carMoveTop 15s ease-in-out infinite;
+    }
+    .top-car .car-body {
+      position: absolute;
+      inset: 18px 8px 8px 8px;
+      background: linear-gradient(135deg, #f3a167, #dd7b41);
+      border-radius: 18px 22px 16px 14px;
+      box-shadow: 0 10px 18px rgba(114, 83, 61, 0.12);
+    }
+    .top-car .car-body::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: -12px;
+      height: 22px;
+      background: linear-gradient(180deg, #f7bf8d, #e48e4a);
+      border-radius: 12px 12px 8px 8px;
+    }
+    .top-car .car-window {
+      position: absolute;
+      left: 22px;
+      right: 20px;
+      top: 0;
+      height: 18px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 8px 8px 0 0;
+    }
+    .top-car .wheel {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #3c332f;
+      border-radius: 50%;
+      bottom: -3px;
+      box-shadow: inset 0 0 0 4px #c9c0b7;
+    }
+    .top-car .wheel.left { left: 24px; }
+    .top-car .wheel.right { right: 26px; }
+    .top-car .car-glow {
+      position: absolute;
+      inset: auto 10px 0 10px;
+      height: 12px;
+      background: rgba(234,138,71,0.18);
+      filter: blur(10px);
+      border-radius: 50%;
+    }
+
+    @keyframes roadMoveTop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(120%); }
+    }
+    @keyframes carMoveTop {
+      0% { transform: translateX(0) scale(0.96); }
+      25% { transform: translateX(240px) scale(1); }
+      50% { transform: translateX(520px) scale(0.98); }
+      75% { transform: translateX(780px) scale(1); }
+      100% { transform: translateX(1100px) scale(0.96); }
+    }
+
     .visual-card {
       position: relative;
       height: 470px;
@@ -203,6 +293,7 @@
       background: linear-gradient(180deg, #fffefb 0%, #f7f1eb 100%);
       overflow: hidden;
       box-shadow: 0 26px 50px rgba(70, 58, 46, 0.08);
+      z-index: 1;
     }
     .visual-card::before {
       content: "";
@@ -314,97 +405,6 @@
     }
     .pill-badge strong { display: block; font-size: 20px; }
     .pill-badge small { color: var(--muted); }
-
-    .moving-road {
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 120px;
-      z-index: 1;
-      overflow: hidden;
-      opacity: 0.82;
-    }
-    .road-line {
-      position: absolute;
-      left: -100%;
-      right: -100%;
-      bottom: 16px;
-      height: 4px;
-      background: linear-gradient(90deg, transparent 0%, rgba(80,80,80,0.18) 12%, rgba(80,80,80,0.18) 50%, transparent 100%);
-      animation: roadMove 18s linear infinite;
-    }
-    .road-line::before,
-    .road-line::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(90deg, transparent 0 28px, rgba(124, 103, 89, 0.18) 28px 42px, transparent 42px 70px);
-    }
-    .car {
-      position: absolute;
-      width: 150px;
-      height: 62px;
-      bottom: 28px;
-      left: -160px;
-      z-index: 3;
-      animation: carMove 12s ease-in-out infinite;
-    }
-    .car-body {
-      position: absolute;
-      inset: 18px 8px 8px 8px;
-      background: linear-gradient(135deg, #f3a167, #dd7b41);
-      border-radius: 18px 22px 16px 14px;
-      box-shadow: 0 10px 18px rgba(114, 83, 61, 0.12);
-    }
-    .car-body::before {
-      content: "";
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      top: -12px;
-      height: 22px;
-      background: linear-gradient(180deg, #f7bf8d, #e48e4a);
-      border-radius: 12px 12px 8px 8px;
-    }
-    .car-window {
-      position: absolute;
-      left: 22px;
-      right: 20px;
-      top: 0;
-      height: 18px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 8px 8px 0 0;
-    }
-    .wheel {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #3c332f;
-      border-radius: 50%;
-      bottom: -3px;
-      box-shadow: inset 0 0 0 4px #c9c0b7;
-    }
-    .wheel.left { left: 24px; }
-    .wheel.right { right: 26px; }
-    .car-glow {
-      position: absolute;
-      inset: auto 10px 0 10px;
-      height: 12px;
-      background: rgba(234,138,71,0.18);
-      filter: blur(10px);
-      border-radius: 50%;
-    }
-
-    @keyframes roadMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(100%); }
-    }
-    @keyframes carMove {
-      0% { transform: translateX(0) scale(1); }
-      25% { transform: translateX(130px) scale(1.01); }
-      50% { transform: translateX(300px) scale(1); }
-      80% { transform: translateX(440px) scale(0.99); }
-      100% { transform: translateX(680px) scale(1); }
-    }
 
     section { padding: 90px 0; }
     .section-head {
@@ -796,6 +796,8 @@
       .visual-laptop { top: 60px; right: 18px; width: 68%; }
       .visual-phone { left: 18px; width: 120px; height: 160px; }
       .benefits { grid-template-columns: 1fr; }
+      .floating-road { height: 120px; }
+      .top-car { top: 34px; }
     }
   </style>
 </head>
@@ -820,6 +822,18 @@
 
   <main>
     <section class="hero" id="home">
+      <div class="floating-road" aria-hidden="true">
+        <div class="road-line-top"></div>
+        <div class="top-car">
+          <div class="car-glow"></div>
+          <div class="car-body">
+            <div class="car-window"></div>
+          </div>
+          <div class="wheel left"></div>
+          <div class="wheel right"></div>
+        </div>
+      </div>
+
       <div class="wrap hero-inner">
         <div>
           <span class="eyebrow">منصة لإدارة تأجير السيارات</span>
@@ -832,18 +846,6 @@
         </div>
 
         <div class="visual-card" aria-label="لوحة تحكم المنصة">
-          <div class="moving-road">
-            <div class="road-line"></div>
-            <div class="car">
-              <div class="car-glow"></div>
-              <div class="car-body">
-                <div class="car-window"></div>
-              </div>
-              <div class="wheel left"></div>
-              <div class="wheel right"></div>
-            </div>
-          </div>
-
           <div class="visual-phone">
             <div class="screen">
               <div class="screen-mark"></div>

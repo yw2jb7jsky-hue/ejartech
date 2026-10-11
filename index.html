@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>إيجار تك | منصة إدارة تأجير السيارات</title>
-    <meta name="description" content="منصة متكاملة لإدارة تأجير السيارات تشمل الحجوزات، العقود، الأسطول، والفواتير بكفاءة عالية وتجربة احترافية." />
+    <meta name="description" content="منصة متكاملة لإدارة تأجير السيارات تشمل الحجوزات، العقود، الأسطول، والفواتير بكفاءة عالية." />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 
@@ -24,6 +24,8 @@
         --shadow: rgba(0,0,0,0.32);
         --white: #ffffff;
         --radius: 24px;
+        --warning: #ffcc66;
+        --warning-dark: #ff8c42;
       }
 
       * { box-sizing: border-box; }
@@ -45,9 +47,56 @@
       button { cursor: pointer; border: none; }
       .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
 
-      .topbar {
+      .demo-banner {
         position: sticky;
         top: 0;
+        z-index: 100;
+        background: linear-gradient(90deg, rgba(255, 204, 102, 0.18), rgba(255, 140, 66, 0.2), rgba(255, 204, 102, 0.18));
+        border-bottom: 1px solid rgba(255, 204, 102, 0.35);
+        overflow: hidden;
+        box-shadow: 0 6px 24px rgba(255, 140, 66, 0.15);
+      }
+
+      .demo-banner-inner {
+        position: relative;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+      }
+
+      .demo-track {
+        display: inline-flex;
+        align-items: center;
+        gap: 40px;
+        padding: 10px 0;
+        color: #fff6d9;
+        font-weight: 800;
+        font-size: 0.82rem;
+        letter-spacing: 0.02em;
+        animation: marquee 18s linear infinite;
+      }
+
+      .demo-track span {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .demo-track span::before {
+        content: "⚠";
+        font-size: 1rem;
+      }
+
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+
+      .topbar {
+        position: sticky;
+        top: 42px;
         z-index: 50;
         backdrop-filter: blur(14px);
         background: rgba(11, 15, 20, 0.68);
@@ -763,6 +812,18 @@
     </style>
   </head>
   <body>
+    <div class="demo-banner" aria-label="إشعار النسخة التجريبية">
+      <div class="demo-banner-inner">
+        <div class="demo-track">
+          <span>هذه النسخة تجريبية وليست النسخة الرسمية للمنصة</span>
+          <span>هذه النسخة تجريبية وليست النسخة الرسمية للمنصة</span>
+          <span>هذه النسخة تجريبية وليست النسخة الرسمية للمنصة</span>
+          <span>هذه النسخة تجريبية وليست النسخة الرسمية للمنصة</span>
+          <span>هذه النسخة تجريبية وليست النسخة الرسمية للمنصة</span>
+        </div>
+      </div>
+    </div>
+
     <header class="topbar">
       <div class="container topbar-inner">
         <a href="#home" class="brand">
@@ -794,7 +855,7 @@
             <span class="eyebrow">منصة إدارة متكاملة</span>
             <h1>أسطولك يتحرك بسرعة،<br><span class="accent">وأعمالك تنمو بثقة.</span></h1>
             <p class="lead">
-              منصة احترافية لإدارة تأجير السيارات تجمع بين الحجز، العقود، الأسطول، الإنتاجية، والفواتير في واجهة واحدة، لتجعل تشغيلك أسهل وأكثر كفاءة.
+              منصة احترافية لإدارة تأجير السيارات تجمع بين الحجز، العقود، الأسطول، الإنتاجية، والفواتير في واجهة واحدة سهلة الاستخدام.
             </p>
 
             <div class="hero-actions">
@@ -901,7 +962,7 @@
           <div class="section-head">
             <span class="eyebrow">لماذا المنصة؟</span>
             <h2>حلّ متكامل يعزز الإنتاجية والسرعة</h2>
-            <p>تم تصميم المنصة لتغطي كل مرحلة من الحجز إلى التسليم، مع تحكم كامل في الأسطول، ومتابعة دقيقة للتقارير والعمليات.</p>
+            <p>تم تصميم المنصة لتغطي كل مرحلة من الحجز إلى التسليم، مع تحكم كامل في الأسطول، ومتابعة دقيقة للتقارير.</p>
           </div>
 
           <div class="feature-grid">
@@ -931,7 +992,7 @@
           <div class="split-copy">
             <span class="eyebrow">مزايا عملية</span>
             <h2>منصة مصممة لتوسيع نشاطك بوضوح وثقة</h2>
-            <p>تجمع المنصة بين تجربة مستخدم احترافية وسهولة تشغيل كبيرة، ما يمنحك إدارة أسطول أكثر كفاءة، وبنية واضحة للقرارات اليومية.</p>
+            <p>تجمع المنصة بين تجربة مستخدم احترافية وسهولة تشغيل كبيرة، ما يمنحك إدارة أسطول أكثر كفاءة، وبنية موثوقة لدعم النمو.</p>
 
             <div class="benefits">
               <div class="benefit">
@@ -998,12 +1059,12 @@
                   <span>حجوزات</span>
                 </div>
                 <div class="mini-box">
-                  <strong>24/7</strong>
-                  <span>دعم</span>
+                  <strong>842</strong>
+                  <span>عقود</span>
                 </div>
                 <div class="mini-box">
                   <strong>96%</strong>
-                  <span>إغلاق</span>
+                  <span>معدل الرضا</span>
                 </div>
               </div>
             </div>
@@ -1014,33 +1075,33 @@
       <section class="process" id="fleet">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">إدارة الأسطول</span>
-            <h2>راقب كل سيارة وكل حركة في الوقت الحقيقي</h2>
-            <p>من خلال لوحة متكاملة، يمكنك معرفة حالة كل سيارة، توفرها، استخداماتها، ومواعيد التسليم والاستلام بدقة كاملة.</p>
+            <span class="eyebrow">الأسطول</span>
+            <h2>خيارات مناسبة لكل نوع من الاستخدام</h2>
+            <p>اختر سيارة تناسب احتياجك، سواء كان تنقل يومي، رحلات طويلة، أو خدمات مؤسسية.</p>
           </div>
 
           <div class="fleet-grid">
             <article class="fleet-card">
-              <div class="fleet-image" style="background: linear-gradient(135deg, rgba(196,214,245,0.5), rgba(242,247,255,0.5)), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;"></div>
-              <div class="fleet-body">
-                <h3>سيارات عائلية</h3>
-                <p>مناسبة للرحلات الداخلية والعائلات مع متابعة دقيقة لتوفر السيارة ومواعيد العودة.</p>
-              </div>
-            </article>
-
-            <article class="fleet-card">
-              <div class="fleet-image" style="background: linear-gradient(135deg, rgba(238,219,201,0.5), rgba(247,240,233,0.5)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;"></div>
-              <div class="fleet-body">
-                <h3>سيارات رجال أعمال</h3>
-                <p>خيار مثالي للرحلات الطويلة والزيارات الرسمية مع سهولة في الجدولة والتنسيق.</p>
-              </div>
-            </article>
-
-            <article class="fleet-card">
-              <div class="fleet-image" style="background: linear-gradient(135deg, rgba(245,228,206,0.5), rgba(255,248,240,0.5)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;"></div>
+              <div class="fleet-image" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.28)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80');"></div>
               <div class="fleet-body">
                 <h3>سيارات فاخرة</h3>
-                <p>تتمتع بتجربة راقية ومميزة للعملاء الذين يبحثون عن جودة واحترافية عالية.</p>
+                <p>للحجوزات المميزة والعروض التنفيذية، مع خدمة أكثر راحة ودقة.</p>
+              </div>
+            </article>
+
+            <article class="fleet-card">
+              <div class="fleet-image" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.28)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');"></div>
+              <div class="fleet-body">
+                <h3>سيارات عائلية</h3>
+                <p>مناسبة للعائلات والرحلات الطويلة مع مساحة مناسبة وأداء متوازن.</p>
+              </div>
+            </article>
+
+            <article class="fleet-card">
+              <div class="fleet-image" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.28)), url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80');"></div>
+              <div class="fleet-body">
+                <h3>سيارات اقتصادية</h3>
+                <p>حل عملي ومناسب للرحلات اليومية مع تكلفة أقل واستعمال مريح.</p>
               </div>
             </article>
           </div>
@@ -1050,34 +1111,30 @@
       <section>
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">حالات الاستخدام</span>
-            <h2>كيف تعمل المنصة؟</h2>
-            <p>تدفق واضح ومباشر يمنحك متابعة سهلة لكل حالة من الطلب إلى التسليم.</p>
+            <span class="eyebrow">العملية</span>
+            <h2>كيف يعمل النظام؟</h2>
           </div>
 
           <div class="process-grid">
             <div class="step">
               <div class="step-num">01</div>
-              <h3>اختر السيارة</h3>
-              <p>حدد نوع السيارة، مدة التأجير، والخدمات المطلوبة بحسب احتياج العميل.</p>
+              <h3>الحجز</h3>
+              <p>يتم استقبال الطلب واستلام البيانات الأساسية بسرعة.</p>
             </div>
-
             <div class="step">
               <div class="step-num">02</div>
-              <h3>تأكيد الحجز</h3>
-              <p>راجع الطلب وتحديد مواقع الاستلام والتسليم في وقت قصير مع تنبيهات فورية.</p>
+              <h3>التأكيد</h3>
+              <p>يتم مراجعة المركبة والمدة والتفاصيل مع العميل.</p>
             </div>
-
             <div class="step">
               <div class="step-num">03</div>
-              <h3>تمرير العقد</h3>
-              <p>أنشئ العقد والسياسات تلقائيًا لتقليل الأخطاء وتسريع الإجراءات.</p>
+              <h3>التسليم</h3>
+              <p>يتم تجهيز السيارة وتوثيق العقد، مع متابعة دقيقة.</p>
             </div>
-
             <div class="step">
               <div class="step-num">04</div>
-              <h3>تتبع الأداء</h3>
-              <p>تابع الإيرادات، الفواتير، والكفاءة داخل لوحة تحكم واحدة ومتكاملة.</p>
+              <h3>المتابعة</h3>
+              <p>تتبع العائدات، الفواتير، والصيانة بكفاءة عالية.</p>
             </div>
           </div>
         </div>
@@ -1086,104 +1143,98 @@
       <section id="pricing">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">باقات مناسبة</span>
-            <h2>اختر الخطة الأنسب لنشاطك</h2>
-            <p>خطط مرنة تدعم الشركات الصغيرة والمتوسطة والكبيرة مع إمكانية التوسع حسب نمو الأعمال.</p>
+            <span class="eyebrow">الباقات</span>
+            <h2>اختر الخطة المناسبة</h2>
+            <p>تجهيزات مرنة تناسب الشركات الصغيرة والمتوسطة ومشغلي الأساطيل.</p>
           </div>
 
           <div class="pricing-grid">
             <div class="price-card">
-              <h3>الباقة الأساسية</h3>
-              <div class="price">299 <small>ريال/شهر</small></div>
+              <h3>أساسي</h3>
+              <div class="price">299 <small>ر.س/شهر</small></div>
               <ul>
                 <li>إدارة الحجوزات</li>
-                <li>لوحة تحكم أساسية</li>
-                <li>تتبع السيارات</li>
-                <li>تقارير شهرية</li>
+                <li>ملف العملاء</li>
+                <li>تقارير أساسية</li>
+                <li>دعم عبر البريد</li>
               </ul>
-              <button class="btn secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">اختيار</button>
+              <button class="btn secondary" style="width: 100%;">ابدأ الآن</button>
             </div>
 
             <div class="price-card featured">
               <span class="popular-tag">الأكثر طلباً</span>
-              <h3>الباقة الاحترافية</h3>
-              <div class="price">799 <small>ريال/شهر</small></div>
+              <h3>مميز</h3>
+              <div class="price">699 <small>ر.س/شهر</small></div>
               <ul>
-                <li>كل مزايا الباقة الأساسية</li>
-                <li>تقارير متقدمة</li>
-                <li>إدارة متعددة الفروع</li>
-                <li>تكامل فواتير وتواصل</li>
+                <li>كل مزايا الخطة الأساسية</li>
+                <li>إدارة الأسطول</li>
+                <li>تتبع العقود والفواتير</li>
+                <li>دعم فني متقدم</li>
               </ul>
-              <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">اختيار</button>
+              <button class="btn primary" style="width: 100%;">ابدأ الآن</button>
             </div>
 
             <div class="price-card">
-              <h3>الباقة المخصصة</h3>
-              <div class="price">حسب الاحتياج</div>
+              <h3>متقدم</h3>
+              <div class="price">1,299 <small>ر.س/شهر</small></div>
               <ul>
-                <li>حلول مخصصة للشركات الكبيرة</li>
-                <li>دعم متخصص</li>
-                <li>تعديلات حسب الهيكل</li>
-                <li>API & integrations</li>
+                <li>كل مزايا الخطة المميزة</li>
+                <li>تقارير متقدمة</li>
+                <li>إدارة متعددة المستخدمين</li>
+                <li>دعم أولوية 24/7</li>
               </ul>
-              <button class="btn secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">استشارة</button>
+              <button class="btn secondary" style="width: 100%;">ابدأ الآن</button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="container">
-          <div class="cta-banner">
-            <div>
-              <h3>جاهز لتجربة أقوى لعملك؟</h3>
-              <p>أطلق منظمتك بقوة واحترافية مع منصة تمنحك رؤية كاملة والتحكم الفوري في كل خطوة.</p>
-            </div>
-            <button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">تواصل معنا</button>
           </div>
         </div>
       </section>
 
       <section id="contact">
         <div class="container">
-          <div class="section-head">
-            <span class="eyebrow">تواصل معنا</span>
-            <h2>احجز استشارتك الآن</h2>
-            <p>أخبرنا عن احتياجك وسنساعدك في تصميم أفضل تجربة تناسب أعمالك.</p>
+          <div class="cta-banner">
+            <div>
+              <h3>هل أنت مستعد لبدء رحلتك؟</h3>
+              <p>احجز استشارة مجانية لتجربة المنصة بشكل واقعي.</p>
+            </div>
+            <button class="btn primary" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">احجز الآن</button>
           </div>
+        </div>
+      </section>
 
-          <div class="contact-wrap">
-            <form id="contactForm">
+      <section>
+        <div class="container">
+          <div class="contact-wrap" id="contact-form">
+            <div class="section-head" style="margin-bottom: 30px;">
+              <span class="eyebrow">تواصل معنا</span>
+              <h2>أرسل طلبك</h2>
+            </div>
+
+            <form onsubmit="event.preventDefault(); showToast();">
               <div class="form-grid">
                 <div class="field">
                   <label for="name">الاسم</label>
-                  <input id="name" type="text" placeholder="اكتب اسمك" required />
+                  <input id="name" type="text" placeholder="اكتب اسمك" />
                 </div>
-
-                <div class="field">
-                  <label for="company">اسم الشركة</label>
-                  <input id="company" type="text" placeholder="اسم الشركة" required />
-                </div>
-
                 <div class="field">
                   <label for="phone">رقم الهاتف</label>
-                  <input id="phone" type="tel" placeholder="9665xxxxxxx" required />
+                  <input id="phone" type="tel" placeholder="05XXXXXXXX" />
                 </div>
-
+                <div class="field">
+                  <label for="company">اسم الشركة</label>
+                  <input id="company" type="text" placeholder="اسم الشركة" />
+                </div>
                 <div class="field">
                   <label for="service">نوع الخدمة</label>
-                  <select id="service" required>
-                    <option value="">اختر الخدمة</option>
-                    <option>استشارة تصميم</option>
-                    <option>بداية المنصة</option>
-                    <option>إدارة الأسطول</option>
-                    <option>تخصيص متقدم</option>
+                  <select id="service">
+                    <option>استشارة عامة</option>
+                    <option>تأجير سيارات</option>
+                    <option>إدارة أسطول</option>
+                    <option>خطة مميزة</option>
                   </select>
                 </div>
-
                 <div class="field full">
-                  <label for="message">رسالتك</label>
-                  <textarea id="message" placeholder="اكتب تفاصيل طلبك هنا..." required></textarea>
+                  <label for="message">الرسالة</label>
+                  <textarea id="message" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
                 </div>
               </div>
 
@@ -1201,33 +1252,33 @@
         <div class="footer-grid">
           <div>
             <div class="footer-brand">إيجار تك</div>
-            <p style="margin-top: 12px; color: var(--muted);">منصة ذكية لإدارة تأجير السيارات، مصممة لتعزيز الكفاءة، خدمة العملاء، وتوسيع الأعمال.</p>
+            <p>منصة لإدارة تأجير السيارات بواجهة احترافية وتجربة سهلة.</p>
           </div>
 
           <div>
-            <h4>القائمة</h4>
+            <h4>روابط سريعة</h4>
             <div class="footer-links">
               <a href="#home">الرئيسية</a>
               <a href="#features">المزايا</a>
-              <a href="#fleet">الأسطول</a>
-            </div>
-          </div>
-
-          <div>
-            <h4>الشركة</h4>
-            <div class="footer-links">
-              <a href="#about">عن المنصة</a>
               <a href="#pricing">الباقات</a>
-              <a href="#contact">تواصل معنا</a>
             </div>
           </div>
 
           <div>
-            <h4>التواصل</h4>
+            <h4>الخدمات</h4>
             <div class="footer-links">
-              <a href="mailto:info@ejartech.com">info@ejartech.com</a>
+              <a href="#fleet">الأسطول</a>
+              <a href="#about">التقارير</a>
+              <a href="#contact">الدعم</a>
+            </div>
+          </div>
+
+          <div>
+            <h4>تواصل</h4>
+            <div class="footer-links">
               <a href="tel:+966500000000">+966 50 000 0000</a>
-              <a href="#">الرياض - السعودية</a>
+              <a href="mailto:info@ejartak.com">info@ejartak.com</a>
+              <a href="#contact">مركز المساعدة</a>
             </div>
           </div>
         </div>
@@ -1236,25 +1287,24 @@
       </div>
     </footer>
 
-    <div class="toast" id="toast">تم إرسال طلبك بنجاح.</div>
+    <div id="toast" class="toast" aria-live="polite">تم إرسال طلبك بنجاح.</div>
 
     <script>
-      const form = document.getElementById('contactForm');
-      const toast = document.getElementById('toast');
-
-      const showToast = (msg) => {
-        toast.textContent = msg;
+      function showToast() {
+        const toast = document.getElementById('toast');
         toast.style.display = 'block';
-        clearTimeout(window.toastTimer);
-        window.toastTimer = setTimeout(() => {
+        setTimeout(() => {
           toast.style.display = 'none';
-        }, 2200);
-      };
+        }, 2400);
+      }
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        showToast('تم إرسال طلبك بنجاح.');
-        form.reset();
+      document.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.classList.contains('menu-btn')) return;
+        const nav = document.getElementById('nav');
+        if (nav && nav.classList.contains('open') && !target.closest('#nav') && !target.closest('.menu-btn')) {
+          nav.classList.remove('open');
+        }
       });
     </script>
   </body>
